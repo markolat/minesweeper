@@ -20,10 +20,27 @@ namespace Minesweeper
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string name;
+        private string level;
         public MainWindow()
         {
             InitializeComponent();
-            new GameWindow("easy", "Marko").Show();
+            btnEasy.Click += Button_click;
+            btnMedium.Click += Button_click;
+            btnHard.Click += Button_click;
+        }
+
+        // Button click event
+        private void Button_click(object sender, System.EventArgs e)
+        {
+            name = txtName.Text;
+            if(name == "")
+            {
+                //TODO dialog window "enter your name"
+            }
+            Button btn = sender as Button;
+            level = btn.Content.ToString().ToLower();
+            new GameWindow(this, level, name).Show();
         }
     }
 }

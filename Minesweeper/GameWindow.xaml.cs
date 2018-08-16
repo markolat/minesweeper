@@ -17,6 +17,7 @@ namespace Minesweeper
 {
     public partial class GameWindow : Window
     {
+        private Window mainWindow;
         private Grid Field;
         private int fieldWidth;
         private string gamerName;
@@ -33,8 +34,10 @@ namespace Minesweeper
         }
 
         // Constructor
-        public GameWindow(string level, string gamerName): this()
+        public GameWindow(Window mainWindow, string level, string gamerName): this()
         {
+            this.mainWindow = mainWindow;
+            this.mainWindow.Hide();
             this.Field = new Grid();
             this.gamerName = gamerName;
             this.level = level;
@@ -205,6 +208,12 @@ namespace Minesweeper
             }
             else
                 return;
+        }
+
+        // On closing event
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.mainWindow.Show();
         }
     }
 }
