@@ -24,10 +24,12 @@ namespace Minesweeper
             this.j = j;
         }
 
+        // getters & setters
         public bool Bomb { get { return this.bomb; } set { this.bomb = value; } }
         public int NearbyBombs { get { return this.nearbyBombs; } set { this.nearbyBombs = value; } }
         public bool IsOpened { get { return this.open; } set { this.open = value; } }
 
+        // Static method that returns field unit from provided list of units with the i, j coords
         public static FieldUnit GetUnit(List<FieldUnit> listOfUnits, int i, int j)
         {
             foreach(FieldUnit fu in listOfUnits)

@@ -26,6 +26,7 @@ namespace Minesweeper
         List<FieldUnit> listOfUnits;
         private Random rnd;
 
+        // Default constructor
         public GameWindow()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace Minesweeper
             {
                 case "easy":
                     this.fieldWidth = 10;
-                    this.bombNumber = 30;
+                    this.bombNumber = 15; // change it later to 30.
                     break;
                 case "medium":
                     this.fieldWidth = 12;
@@ -114,6 +115,7 @@ namespace Minesweeper
                     int row = Grid.GetRow(listOfUnits[rng]);
                     int col = Grid.GetColumn(listOfUnits[rng]);
 
+                    // updating 'nearby bombs' value to units around bomb-initialized unit
                     for(int i = -1; i < 2; i++)
                     {
                         for(int j = -1; j < 2; j++)
@@ -125,8 +127,10 @@ namespace Minesweeper
                                 continue;
 
                             FieldUnit unit = FieldUnit.GetUnit(listOfUnits, r, c);
+
                             if (unit.Bomb || (i == 0 && j == 0))
                                 continue;
+
                             unit.NearbyBombs++;                            
                         }
                     }
@@ -134,31 +138,40 @@ namespace Minesweeper
             }
         }
 
+        // Field unit click event
         private void Button_click(object sender, System.EventArgs e)
         {
             FieldUnit b = sender as FieldUnit;
-            b.IsOpened = true;
-            int indexOfFirstFieldUnit = Field.Children.IndexOf(b);
 
+            // Checking if it's start of game
             if (startOfGame)
             {
                 startOfGame = false;
+                int indexOfFirstFieldUnit = Field.Children.IndexOf(b);
                 InitializeField(indexOfFirstFieldUnit);
             }
 
-            int row = Grid.GetRow(b);
-            int column = Grid.GetColumn(b);
+            openField(b);
+        }
+
+        // Recursive function that opens field units
+        private void openField(FieldUnit fu)
+        {
+            fu.IsOpened = true;
+
+            int row = Grid.GetRow(fu);
+            int column = Grid.GetColumn(fu);
 
             TextBlock tb = new TextBlock();
-            if (b.Bomb)
+            if (fu.Bomb)
                 tb.Text = "B";
             else
-                tb.Text = b.NearbyBombs.ToString();
+                tb.Text = fu.NearbyBombs.ToString();
 
             tb.FontSize = 30;
             tb.HorizontalAlignment = HorizontalAlignment.Center;
             tb.VerticalAlignment = VerticalAlignment.Center;
-            Field.Children.Remove(b);
+            Field.Children.Remove(fu);
             Border border = new Border();
             border.BorderThickness = new Thickness(1);
             border.BorderBrush = new SolidColorBrush(Colors.LightGray);
@@ -166,6 +179,32 @@ namespace Minesweeper
             Grid.SetRow(border, row);
             Grid.SetColumn(border, column);
             Field.Children.Add(border);
+
+            // Opening adjacent field units if condition is true
+            if (fu.NearbyBombs == 0)
+            {
+                for(int i = -1; i < 2; i++)
+                {
+                    for(int j = -1; j < 2; j++)
+                    {
+                        int r = row + i;
+                        int c = column + j;
+
+                        if (r < 0 || r > fieldWidth - 1 || c < 0 || c > fieldWidth - 1 ||
+                            (i == 0 && j == 0))
+                            continue;
+
+                        FieldUnit unit = FieldUnit.GetUnit(listOfUnits, r, c);
+
+                        if (unit.IsOpened)
+                            continue;
+                        else
+                            openField(unit);
+                    }
+                }
+            }
+            else
+                return;
         }
     }
 }

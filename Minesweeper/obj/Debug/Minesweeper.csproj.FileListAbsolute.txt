@@ -15,3 +15,20 @@ C:\Users\Marko Latinovic\source\repos\Minesweeper\Minesweeper\obj\Debug\Mineswee
 C:\Users\Marko Latinovic\source\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompileInputs.cache
 C:\Users\Marko Latinovic\source\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
 C:\Users\Marko Latinovic\source\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
+D:\repos\Minesweeper\Minesweeper\bin\Debug\Minesweeper.exe.config
+D:\repos\Minesweeper\Minesweeper\bin\Debug\Minesweeper.exe
+D:\repos\Minesweeper\Minesweeper\bin\Debug\Minesweeper.pdb
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+D:\repos\Minesweeper\Minesweeper\obj\Debug\GameWindow.g.cs
+D:\repos\Minesweeper\Minesweeper\obj\Debug\MainWindow.g.cs
+D:\repos\Minesweeper\Minesweeper\obj\Debug\App.g.cs
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper_MarkupCompile.cache
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper_MarkupCompile.lref
+D:\repos\Minesweeper\Minesweeper\obj\Debug\GameWindow.baml
+D:\repos\Minesweeper\Minesweeper\obj\Debug\MainWindow.baml
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.g.resources
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.Properties.Resources.resources
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.GenerateResource.Cache
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompileInputs.cache
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
+D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
