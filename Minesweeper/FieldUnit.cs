@@ -11,8 +11,8 @@ namespace Minesweeper
         private bool bomb;
         private int nearbyBombs;
         private bool open;
-        private int i;
-        private int j;
+        private int row;
+        private int col;
 
         // Constructor
         public FieldUnit(bool bomb, int nearbyBombs, int i, int j)
@@ -20,21 +20,23 @@ namespace Minesweeper
             this.bomb = bomb;
             this.nearbyBombs = nearbyBombs;
             this.open = false;
-            this.i = i;
-            this.j = j;
+            this.row = i;
+            this.col = j;
         }
 
         // getters & setters
         public bool Bomb { get { return this.bomb; } set { this.bomb = value; } }
         public int NearbyBombs { get { return this.nearbyBombs; } set { this.nearbyBombs = value; } }
         public bool IsOpened { get { return this.open; } set { this.open = value; } }
+        public int Row { get { return this.row; } }
+        public int Col { get { return this.col; } }
 
         // Static method that returns field unit from provided list of units with the i, j coords
         public static FieldUnit GetUnit(List<FieldUnit> listOfUnits, int i, int j)
         {
             foreach(FieldUnit fu in listOfUnits)
             {
-                if (fu.i == i && fu.j == j)
+                if (fu.row == i && fu.col == j)
                     return fu;
             }
             return null;
