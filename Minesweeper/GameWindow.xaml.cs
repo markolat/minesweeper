@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
+using System.IO;
 
 namespace Minesweeper
 {
@@ -167,11 +168,23 @@ namespace Minesweeper
 
             TextBlock tb = new TextBlock();
             if (fu.Bomb)
-                tb.Text = "B";
+            {
+                fu.IsEnabled = false;
+                //attaches mine image to the button
+                fu.Content = new Image
+                {
+                    Source = new BitmapImage(new Uri(@"..\..\..\mine.png", UriKind.Relative)),
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                // TODO
+                return;
+            }
             else
+            {
                 tb.Text = fu.NearbyBombs.ToString();
-
-            tb.FontSize = 30;
+            }
+                
+            setTbStyle(tb);
             tb.HorizontalAlignment = HorizontalAlignment.Center;
             tb.VerticalAlignment = VerticalAlignment.Center;
             Field.Children.Remove(fu);
@@ -208,6 +221,43 @@ namespace Minesweeper
             }
             else
                 return;
+        }
+
+        // Setting the color style for textblock controls
+        private void setTbStyle(TextBlock tb)
+        {
+            switch (tb.Text)
+            {
+                case "0":
+                    tb.Text = "";
+                    break;
+                case "1":
+                    tb.Style = FindResource("StyleLightBlue") as Style;
+                    break;
+                case "2":
+                    tb.Style = FindResource("StyleGreen") as Style;
+                    break;
+                case "3":
+                    tb.Style = FindResource("StyleRed") as Style;
+                    break;
+                case "4":
+                    tb.Style = FindResource("StyleDarkBlue") as Style;
+                    break;
+                case "5":
+                    tb.Style = FindResource("StyleBrown") as Style;
+                    break;
+                case "6":
+                    tb.Style = FindResource("StyleAqua") as Style;
+                    break;
+                case "7":
+                    tb.Style = FindResource("StyleBlack") as Style;
+                    break;
+                case "8":
+                    tb.Style = FindResource("StyleLightGray") as Style;
+                    break;
+                default:
+                    break;
+            }
         }
 
         // On closing event

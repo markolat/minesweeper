@@ -6,6 +6,40 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Title="GameWindow" Height="300" Width="300" Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="StyleLightBlue" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="LightBlue"/>
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleGreen" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Green" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleRed" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleDarkBlue" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DarkBlue" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleBrown" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Brown" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleAqua" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Aqua" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleBlack" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+        <Style x:Key="StyleLghtGray" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="LightGray" />
+            <Setter Property="FontSize" Value="30" />
+        </Style>
+    </Window.Resources>
     <Grid Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Name="ControlBar" Height="0.15*"></RowDefinition>
