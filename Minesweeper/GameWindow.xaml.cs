@@ -166,17 +166,22 @@ namespace Minesweeper
             int row = Grid.GetRow(fu);
             int column = Grid.GetColumn(fu);
 
-            TextBlock tb = new TextBlock();
+            TextBlock tb = new TextBlock
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
             if (fu.Bomb)
             {
                 fu.IsEnabled = false;
                 //attaches mine image to the button
                 fu.Content = new Image
                 {
-                    Source = new BitmapImage(new Uri(@"..\..\..\mine.png", UriKind.Relative)),
+                    Source = new BitmapImage(new Uri("pack://application:,,,../../mine.png", UriKind.Relative)),
                     VerticalAlignment = VerticalAlignment.Center
                 };
-                // TODO
+                // TODO end of game
                 return;
             }
             else
@@ -185,13 +190,14 @@ namespace Minesweeper
             }
                 
             setTbStyle(tb);
-            tb.HorizontalAlignment = HorizontalAlignment.Center;
-            tb.VerticalAlignment = VerticalAlignment.Center;
             Field.Children.Remove(fu);
-            Border border = new Border();
-            border.BorderThickness = new Thickness(1);
-            border.BorderBrush = new SolidColorBrush(Colors.LightGray);
-            border.Child = tb;
+
+            Border border = new Border
+            {
+                BorderThickness = new Thickness(1),
+                BorderBrush = new SolidColorBrush(Colors.LightGray),
+                Child = tb
+            };
             Grid.SetRow(border, row);
             Grid.SetColumn(border, column);
             Field.Children.Add(border);
