@@ -20,10 +20,12 @@ namespace Minesweeper
     {
         private Window mainWindow;
         private Grid Field;
+        private Frame frame;
         private int fieldWidth;
         private string gamerName;
-        private string level;
+        private string difficulty;
         private int bombNumber;
+        private const int fieldUnitSize = 40;
         private bool startOfGame;
         List<FieldUnit> listOfUnits;
         private Random rnd;
@@ -35,34 +37,37 @@ namespace Minesweeper
         }
 
         // Constructor
-        public GameWindow(Window mainWindow, string level, string gamerName): this()
+        public GameWindow(Window mainWindow, string difficulty, string gamerName): this()
         {
             this.mainWindow = mainWindow;
             this.mainWindow.Hide();
             this.Field = new Grid();
+            this.frame = new Frame();
             this.gamerName = gamerName;
-            this.level = level;
+            this.difficulty = difficulty;
             this.startOfGame = true;
             listOfUnits = new List<FieldUnit>(this.bombNumber);
-            switch (level)
+            switch (difficulty)
             {
                 case "easy":
                     this.fieldWidth = 10;
-                    this.bombNumber = 15; // change it later to 30.
+                    this.bombNumber = 15; // change it later to 30 (Project conditions :S)
                     break;
                 case "medium":
                     this.fieldWidth = 12;
-                    this.bombNumber = 45;
+                    this.bombNumber = 25; // change it to 45
                     break;
                 case "hard":
                     this.fieldWidth = 14;
-                    this.bombNumber = 60;
+                    this.bombNumber = 35; // change it to 60
                     break;
                 default:
                     break;
             }
-            this.MinWidth = 500;
-            this.MinHeight = 600;
+            this.frame.Width = fieldUnitSize * fieldWidth;
+            this.frame.Height = fieldUnitSize * fieldWidth;
+            this.MinWidth = this.frame.Width + 100;
+            this.MinHeight = this.frame.Height + 200;
             PrepareField();
         }
 
@@ -85,11 +90,20 @@ namespace Minesweeper
                     Grid.SetRow(fu, i);
                     Grid.SetColumn(fu, j);
                     Field.Children.Add(fu);
-                    fu.Click += Button_click;
+                    fu.Click += FieldUnit_click;
+                    fu.MouseRightButtonUp += FieldUnit_right_click;
                 }
             }
-            Grid.SetRow(Field, 1);
-            mainGrid.Children.Add(Field);
+            // Border around the field
+            Border border = new Border
+            {
+                BorderThickness = new Thickness(2),
+                BorderBrush = new SolidColorBrush(Colors.Blue),
+                Child = Field
+            };
+            this.frame.Content = border;
+            Grid.SetRow(this.frame, 1);
+            mainGrid.Children.Add(this.frame);
         }
 
         // Initializing field units with bombs and other data such as nearby bombs
@@ -115,7 +129,7 @@ namespace Minesweeper
                     listOfBombs.Add(rng);
                     listOfUnits[rng].Bomb = true;
                     listOfUnits[rng].NearbyBombs = -1;
-                    listOfUnits[rng].IsOpened = false;
+                    listOfUnits[rng].Open = false;
                     int row = Grid.GetRow(listOfUnits[rng]);
                     int col = Grid.GetColumn(listOfUnits[rng]);
 
@@ -143,25 +157,51 @@ namespace Minesweeper
         }
 
         // Field unit click event
-        private void Button_click(object sender, System.EventArgs e)
+        private void FieldUnit_click(object sender, System.EventArgs e)
         {
-            FieldUnit b = sender as FieldUnit;
+            FieldUnit fu = sender as FieldUnit;
 
             // Checking if it's start of game
             if (startOfGame)
             {
                 startOfGame = false;
-                int indexOfFirstFieldUnit = Field.Children.IndexOf(b);
+                int indexOfFirstFieldUnit = Field.Children.IndexOf(fu);
                 InitializeField(indexOfFirstFieldUnit);
             }
+            if (fu.Flag)
+                return;
 
-            openField(b);
+            openField(fu);
+        }
+
+        // Field unit rightclick event (setting flag)
+        private void FieldUnit_right_click(object sender, System.EventArgs e)
+        {
+            FieldUnit fu = sender as FieldUnit;
+
+            if (fu.Flag)
+            {
+                fu.Flag = false;
+                fu.Content = "";
+                return;
+            }
+            else
+                fu.Flag = true;
+
+            // Attaches flag image to the button
+            fu.Content = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/flag.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            // TODO  other functionality like
+            // not indirectly opening the field with flag on it
         }
 
         // Recursive function that opens field units
         private void openField(FieldUnit fu)
         {
-            fu.IsOpened = true;
+            fu.Open = true;
 
             int row = Grid.GetRow(fu);
             int column = Grid.GetColumn(fu);
@@ -175,7 +215,7 @@ namespace Minesweeper
             if (fu.Bomb)
             {
                 fu.IsEnabled = false;
-                //attaches mine image to the button
+                // Attaches mine image to the button
                 fu.Content = new Image
                 {
                     Source = new BitmapImage(new Uri("Resources/mine.png", UriKind.Relative)),
@@ -218,7 +258,8 @@ namespace Minesweeper
 
                         FieldUnit unit = FieldUnit.GetUnit(listOfUnits, r, c);
 
-                        if (unit.IsOpened)
+                        // If it's already open or it's marked with flag, continue
+                        if (unit.Open || unit.Flag)
                             continue;
                         else
                             openField(unit);
