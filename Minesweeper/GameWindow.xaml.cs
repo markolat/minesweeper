@@ -178,7 +178,7 @@ namespace Minesweeper
                 //attaches mine image to the button
                 fu.Content = new Image
                 {
-                    Source = new BitmapImage(new Uri("pack://application:,,,../../mine.png", UriKind.Relative)),
+                    Source = new BitmapImage(new Uri("Resources/mine.png", UriKind.Relative)),
                     VerticalAlignment = VerticalAlignment.Center
                 };
                 // TODO end of game
