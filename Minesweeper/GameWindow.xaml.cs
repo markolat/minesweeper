@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
 using System.IO;
+using System.Windows.Threading;
 
 namespace Minesweeper
 {
@@ -21,6 +22,7 @@ namespace Minesweeper
         private Window mainWindow;
         private Grid Field;
         private Frame frame;
+        private DispatcherTimer dTimer;
         private Image smiley;
         private Image smiley_click;
         private Image smiley_won;
@@ -29,6 +31,7 @@ namespace Minesweeper
         private string difficulty;
         private int bombNumber;
         private int mineCounter;
+        private int timer;
         private const int fieldUnitSize = 40;
         private bool startOfGame;
         List<FieldUnit> listOfUnits;
@@ -45,10 +48,14 @@ namespace Minesweeper
         {
             this.mainWindow = mainWindow;
             this.mainWindow.Hide();
-            this.Field = new Grid();
-            this.frame = new Frame();
+            Field = new Grid();
+            frame = new Frame();
+            dTimer = new DispatcherTimer();
             this.gamerName = gamerName;
             this.difficulty = difficulty;
+            dTimer.Tick += dispatcherTimer_Tick;
+            dTimer.Interval = new TimeSpan(0, 0, 1);
+            timer = 0;
             listOfUnits = new List<FieldUnit>(this.bombNumber);
 
             // Setting attributes regarding the choosen difficulty
@@ -220,6 +227,7 @@ namespace Minesweeper
             if (startOfGame)
             {
                 startOfGame = false;
+                dTimer.Start();
                 int indexOfFirstFieldUnit = Field.Children.IndexOf(fu);
                 InitializeField(indexOfFirstFieldUnit);
             }
@@ -372,6 +380,7 @@ namespace Minesweeper
         // On closing event
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            dTimer.Stop(); // I'm not sure if i need to do this, but, i did it just in case
             this.mainWindow.Show();
         }
 
@@ -383,6 +392,16 @@ namespace Minesweeper
             PrepareField();
             mineCounter = bombNumber;
             txtMineCounter.Text = mineCounter.ToString();
+            dTimer.Stop();
+            timer = 0;
+            txtTimer.Text = timer.ToString();
+        }
+
+        // Dispatcher timer functionality
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            timer++;
+            txtTimer.Text = timer.ToString();
         }
     }
 }
