@@ -48,7 +48,6 @@ namespace Minesweeper
             this.frame = new Frame();
             this.gamerName = gamerName;
             this.difficulty = difficulty;
-            this.startOfGame = true;
             listOfUnits = new List<FieldUnit>(this.bombNumber);
 
             // Setting attributes regarding the choosen difficulty
@@ -101,7 +100,7 @@ namespace Minesweeper
             PrepareField();
         }
 
-        // Createing dynamic grid
+        // Creating dynamic grid
         private void CreateGrid()
         {
             for (int i = 0; i < this.fieldWidth; i++)
@@ -110,7 +109,7 @@ namespace Minesweeper
                 Field.RowDefinitions.Add(new RowDefinition());
             }
 
-            // Border around the field grid
+            // Setting border around the field grid
             Border border = new Border
             {
                 BorderThickness = new Thickness(2),
@@ -128,6 +127,7 @@ namespace Minesweeper
         // Creating field units
         private void PrepareField()
         {
+            this.startOfGame = true;
             for (int i = 0; i < this.fieldWidth; i++)
             {
                 for (int j = 0; j < this.fieldWidth; j++)
@@ -364,10 +364,12 @@ namespace Minesweeper
             this.mainWindow.Show();
         }
 
-        // Smiley button click event
+        // Smiley button click event.. Starting new game
         private void btnSmiley_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            Field.Children.Clear();
+            listOfUnits.Clear();
+            PrepareField();
         }
     }
 }
