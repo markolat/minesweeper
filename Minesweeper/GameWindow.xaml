@@ -51,5 +51,6 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="50" Height="50" Click="btnSmiley_Click"></Button>
     </Grid>
 </Window>

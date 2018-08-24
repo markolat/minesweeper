@@ -104,7 +104,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Smiley.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\flag.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -114,6 +116,12 @@
     <Resource Include="Resources\mine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Smiley-click.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Smiley-won.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,6 +21,9 @@ namespace Minesweeper
         private Window mainWindow;
         private Grid Field;
         private Frame frame;
+        private Image smiley;
+        private Image smiley_click;
+        private Image smiley_won;
         private int fieldWidth;
         private string gamerName;
         private string difficulty;
@@ -47,6 +50,8 @@ namespace Minesweeper
             this.difficulty = difficulty;
             this.startOfGame = true;
             listOfUnits = new List<FieldUnit>(this.bombNumber);
+
+            // Setting attributes regarding the choosen difficulty
             switch (difficulty)
             {
                 case "easy":
@@ -64,10 +69,34 @@ namespace Minesweeper
                 default:
                     break;
             }
+
+            // Defining frame width and height regarding the field unit size and
+            // setting min width and height of game window
             this.frame.Width = fieldUnitSize * fieldWidth;
             this.frame.Height = fieldUnitSize * fieldWidth;
             this.MinWidth = this.frame.Width + 100;
             this.MinHeight = this.frame.Height + 200;
+
+            // Instantiating smiley images
+            smiley = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/Smiley.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            smiley_click = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/Smiley-click.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            smiley_won = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            // Attaching Smiley image to the "new game" button
+            btnSmiley.Content = smiley;
+
             PrepareField();
         }
 
@@ -90,7 +119,20 @@ namespace Minesweeper
                     Grid.SetRow(fu, i);
                     Grid.SetColumn(fu, j);
                     Field.Children.Add(fu);
+
+                    // Adding field unit events
                     fu.Click += FieldUnit_click;
+
+                    fu.PreviewMouseLeftButtonDown += delegate
+                    {
+                        btnSmiley.Content = smiley_click;
+                    };
+
+                    fu.PreviewMouseLeftButtonUp += delegate
+                    {
+                        btnSmiley.Content = smiley;
+                    };
+
                     fu.MouseRightButtonUp += FieldUnit_right_click;
                 }
             }
@@ -313,6 +355,12 @@ namespace Minesweeper
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.mainWindow.Show();
+        }
+
+        // Smiley button click event
+        private void btnSmiley_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
         }
     }
 }
