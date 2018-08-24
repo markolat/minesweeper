@@ -28,6 +28,7 @@ namespace Minesweeper
         private string gamerName;
         private string difficulty;
         private int bombNumber;
+        private int mineCounter;
         private const int fieldUnitSize = 40;
         private bool startOfGame;
         List<FieldUnit> listOfUnits;
@@ -68,6 +69,9 @@ namespace Minesweeper
                 default:
                     break;
             }
+
+            mineCounter = bombNumber;
+            txtMineCounter.Text = mineCounter.ToString();
 
             // Defining frame width and height regarding the field unit size and
             // setting min width and height of game window
@@ -230,14 +234,21 @@ namespace Minesweeper
         {
             FieldUnit fu = sender as FieldUnit;
 
+            // If it is flag, remove it and return
             if (fu.Flag)
             {
                 fu.Flag = false;
                 fu.Content = "";
+                mineCounter++;
+                txtMineCounter.Text = mineCounter.ToString();
                 return;
             }
-            else
-                fu.Flag = true;
+
+            // If mine counter is 0 then can't put more flags
+            if (mineCounter == 0)
+                return;
+
+            fu.Flag = true;
 
             // Attaches flag image to the button
             fu.Content = new Image
@@ -245,8 +256,8 @@ namespace Minesweeper
                 Source = new BitmapImage(new Uri("Resources/flag.png", UriKind.Relative)),
                 VerticalAlignment = VerticalAlignment.Center
             };
-            // TODO  other functionality like
-            // not indirectly opening the field with flag on it
+            mineCounter--;
+            txtMineCounter.Text = mineCounter.ToString();
         }
 
         // Recursive function that opens field units
@@ -370,6 +381,8 @@ namespace Minesweeper
             Field.Children.Clear();
             listOfUnits.Clear();
             PrepareField();
+            mineCounter = bombNumber;
+            txtMineCounter.Text = mineCounter.ToString();
         }
     }
 }

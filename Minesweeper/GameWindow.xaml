@@ -51,6 +51,13 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="50" Height="50" Click="btnSmiley_Click"></Button>
+        <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="50" Height="50" Click="btnSmiley_Click"
+                BorderBrush="Blue" BorderThickness="2"/>
+        <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
+                 IsEnabled="False" Foreground="Blue" BorderBrush="Blue" BorderThickness="2"/>
+        <TextBox x:Name="txtTimer" Grid.Row="0" Grid.Column="2" Width="100" Height="50" Text="0"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 FontSize="25" IsEnabled="False" Foreground="Red" BorderBrush="Blue" BorderThickness="2"/>
     </Grid>
 </Window>
