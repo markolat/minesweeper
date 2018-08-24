@@ -103,6 +103,8 @@ namespace Minesweeper
             };
             this.frame.Content = border;
             Grid.SetRow(this.frame, 1);
+            Grid.SetColumn(this.frame, 0);
+            Grid.SetColumnSpan(this.frame, 3);
             mainGrid.Children.Add(this.frame);
         }
 
