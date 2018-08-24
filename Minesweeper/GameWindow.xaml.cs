@@ -97,11 +97,12 @@ namespace Minesweeper
             // Attaching Smiley image to the "new game" button
             btnSmiley.Content = smiley;
 
+            CreateGrid();
             PrepareField();
         }
 
-        // Creating dynamic grid and field units
-        private void PrepareField()
+        // Createing dynamic grid
+        private void CreateGrid()
         {
             for (int i = 0; i < this.fieldWidth; i++)
             {
@@ -109,6 +110,24 @@ namespace Minesweeper
                 Field.RowDefinitions.Add(new RowDefinition());
             }
 
+            // Border around the field grid
+            Border border = new Border
+            {
+                BorderThickness = new Thickness(2),
+                BorderBrush = new SolidColorBrush(Colors.Blue),
+                Child = Field
+            };
+
+            this.frame.Content = border;
+            Grid.SetRow(this.frame, 1);
+            Grid.SetColumn(this.frame, 0);
+            Grid.SetColumnSpan(this.frame, 3);
+            mainGrid.Children.Add(this.frame);
+        }
+
+        // Creating field units
+        private void PrepareField()
+        {
             for (int i = 0; i < this.fieldWidth; i++)
             {
                 for (int j = 0; j < this.fieldWidth; j++)
@@ -136,18 +155,6 @@ namespace Minesweeper
                     fu.MouseRightButtonUp += FieldUnit_right_click;
                 }
             }
-            // Border around the field
-            Border border = new Border
-            {
-                BorderThickness = new Thickness(2),
-                BorderBrush = new SolidColorBrush(Colors.Blue),
-                Child = Field
-            };
-            this.frame.Content = border;
-            Grid.SetRow(this.frame, 1);
-            Grid.SetColumn(this.frame, 0);
-            Grid.SetColumnSpan(this.frame, 3);
-            mainGrid.Children.Add(this.frame);
         }
 
         // Initializing field units with bombs and other data such as nearby bombs
