@@ -7,6 +7,45 @@
         mc:Ignorable="d"
         Title="GameWindow" Height="300" Width="400" Closing="Window_Closing">
     <Window.Resources>
+        <Style x:Key="btnSmileyStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="2" BorderBrush="#3B3B3B" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FieldUnitStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Arrow" />
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="Margin" Value="0.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="2" BorderBrush="#3B3B3B" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="StyleLightBlue" TargetType="TextBlock">
             <Setter Property="Foreground" Value="LightBlue"/>
             <Setter Property="FontSize" Value="30" />
@@ -52,7 +91,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="50" Height="50" Click="btnSmiley_Click"
-                BorderBrush="Blue" BorderThickness="2"/>
+                Style="{StaticResource btnSmileyStyle}"/>
         <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
                  IsEnabled="False" Foreground="Blue" BorderBrush="Blue" BorderThickness="2"/>
