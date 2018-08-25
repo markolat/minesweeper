@@ -1,3 +1,3 @@
 # Minesweeper game
 
-Developing minesweeper game using C#, WPF
+Developing minesweeper game using C#, WPF Application
