@@ -345,7 +345,7 @@ namespace Minesweeper
                 funit.IsEnabled = false;
                 if (funit.Bomb)
                 {
-                    if (funit == fu)
+                    if (funit == fu || funit.Flag)
                         continue;
 
                     funit.Content = new Image
@@ -353,6 +353,17 @@ namespace Minesweeper
                         Source = new BitmapImage(new Uri("Resources/mine.png", UriKind.Relative)),
                         VerticalAlignment = VerticalAlignment.Center
                     };
+                }
+                else
+                {
+                    if (funit.Flag)
+                    {
+                        funit.Content = new Image
+                        {
+                            Source = new BitmapImage(new Uri("Resources/notMine.png", UriKind.Relative)),
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+                    }
                 }
             }
 
@@ -418,6 +429,7 @@ namespace Minesweeper
             dTimer.Stop();
             timer = 0;
             txtTimer.Text = timer.ToString();
+            btnSmiley.Content = smiley;
         }
 
         // Dispatcher timer functionality
