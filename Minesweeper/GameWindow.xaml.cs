@@ -186,7 +186,7 @@ namespace Minesweeper
                     listOfBombs.Add(rng);
                     listOfUnits[rng].Bomb = true;
                     listOfUnits[rng].NearbyBombs = -1;
-                    listOfUnits[rng].Open = false;
+                    listOfUnits[rng].IsOpened = false;
                     int row = Grid.GetRow(listOfUnits[rng]);
                     int col = Grid.GetColumn(listOfUnits[rng]);
 
@@ -230,6 +230,9 @@ namespace Minesweeper
                 return;
 
             openField(fu);
+            // Here to check if all units that does not have mine are opened
+            if (AllOpened())
+                GameWon();
         }
 
         // Field unit rightclick event (setting flag)
@@ -266,7 +269,7 @@ namespace Minesweeper
         // Recursive function that opens field units
         private void openField(FieldUnit fu)
         {
-            fu.Open = true;
+            fu.IsOpened = true;
 
             int row = Grid.GetRow(fu);
             int column = Grid.GetColumn(fu);
@@ -316,7 +319,7 @@ namespace Minesweeper
                         FieldUnit unit = FieldUnit.GetUnit(listOfUnits, r, c);
 
                         // If it's already open or it's marked with flag, continue
-                        if (unit.Open || unit.Flag)
+                        if (unit.IsOpened || unit.Flag)
                             continue;
                         else
                             openField(unit);
@@ -370,6 +373,45 @@ namespace Minesweeper
             btnSmiley.Content = new Image
             {
                 Source = new BitmapImage(new Uri("Resources/Smiley-dead.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+        }
+
+        // Checking if all field units that does not have mine are opened
+        private Boolean AllOpened()
+        {
+            foreach(FieldUnit fu in listOfUnits)
+            {
+                if (fu.Bomb)
+                    continue;
+                if (!fu.IsOpened)
+                    return false;
+            }
+            return true;
+        }
+
+        // Method that finishes the game after player has won it
+        private void GameWon()
+        {
+            dTimer.Stop();
+            foreach (FieldUnit fu in listOfUnits)
+            {
+                fu.IsEnabled = false;
+                if (fu.Bomb && !fu.Flag)
+                {
+                    fu.Flag = true;
+                    mineCounter--;
+                    txtMineCounter.Text = mineCounter.ToString();
+                    fu.Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("Resources/flag.png", UriKind.Relative)),
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                }
+            }
+            btnSmiley.Content = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
                 VerticalAlignment = VerticalAlignment.Center
             };
         }

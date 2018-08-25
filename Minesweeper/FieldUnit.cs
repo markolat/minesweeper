@@ -11,7 +11,7 @@ namespace Minesweeper
         private bool bomb;
         private bool flag;
         private int nearbyBombs;
-        private bool open;
+        private bool opened;
         private int row;
         private int col;
 
@@ -21,7 +21,7 @@ namespace Minesweeper
             this.bomb = bomb;
             this.nearbyBombs = nearbyBombs;
             this.flag = false;
-            this.open = false;
+            this.opened = false;
             this.row = i;
             this.col = j;
         }
@@ -30,7 +30,7 @@ namespace Minesweeper
         public bool Bomb { get { return this.bomb; } set { this.bomb = value; } }
         public bool Flag { get { return this.flag; } set { this.flag = value; } }
         public int NearbyBombs { get { return this.nearbyBombs; } set { this.nearbyBombs = value; } }
-        public bool Open { get { return this.open; } set { this.open = value; } }
+        public bool IsOpened { get { return this.opened; } set { this.opened = value; } }
         public int Row { get { return this.row; } }
         public int Col { get { return this.col; } }
 
