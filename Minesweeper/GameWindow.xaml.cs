@@ -25,7 +25,6 @@ namespace Minesweeper
         private DispatcherTimer dTimer;
         private Image smiley;
         private Image smiley_click;
-        private Image smiley_won;
         private int fieldWidth;
         private string gamerName;
         private string difficulty;
@@ -96,11 +95,6 @@ namespace Minesweeper
             smiley_click = new Image
             {
                 Source = new BitmapImage(new Uri("Resources/Smiley-click.png", UriKind.Relative)),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            smiley_won = new Image
-            {
-                Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
                 VerticalAlignment = VerticalAlignment.Center
             };
 
@@ -285,14 +279,7 @@ namespace Minesweeper
 
             if (fu.Bomb)
             {
-                fu.IsEnabled = false;
-                // Attaches mine image to the button
-                fu.Content = new Image
-                {
-                    Source = new BitmapImage(new Uri("Resources/mine.png", UriKind.Relative)),
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                // TODO end of game
+                gameOver(fu);
                 return;
             }
             else
@@ -302,7 +289,6 @@ namespace Minesweeper
                 
             setTbStyle(tb);
             Field.Children.Remove(fu);
-
             Border border = new Border
             {
                 BorderThickness = new Thickness(1),
@@ -339,6 +325,42 @@ namespace Minesweeper
             }
             else
                 return;
+        }
+
+        // Ending the game (stepped on mine)
+        private void gameOver(FieldUnit fu)
+        {
+            dTimer.Stop();
+            fu.IsEnabled = false;
+            // Attaches mine-blown image to the button
+            fu.Content = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/mine-blown.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            // Show other mines and disable filed units
+            foreach (FieldUnit funit in listOfUnits)
+            {
+                funit.IsEnabled = false;
+                if (funit.Bomb)
+                {
+                    if (funit == fu)
+                        continue;
+
+                    funit.Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("Resources/mine.png", UriKind.Relative)),
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                }
+            }
+
+            btnSmiley.Content = new Image
+            {
+                Source = new BitmapImage(new Uri("Resources/Smiley-dead.png", UriKind.Relative)),
+                VerticalAlignment = VerticalAlignment.Center
+            };
         }
 
         // Setting the color style for textblock controls
