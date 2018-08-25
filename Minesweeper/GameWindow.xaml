@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="GameWindow" Height="300" Width="400" Closing="Window_Closing">
+        Title="Minesweeper" Icon="Resources/mine.png" Height="300" Width="400" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="btnSmileyStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
