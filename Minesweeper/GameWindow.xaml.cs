@@ -331,16 +331,20 @@ namespace Minesweeper
         }
 
         // Ending the game (stepped on mine)
-        private void gameOver(FieldUnit fu)
+        private void gameOver(FieldUnit fu=null)
         {
             dTimer.Stop();
-            fu.IsEnabled = false;
-            // Attaches mine-blown image to the button
-            fu.Content = new Image
+
+            if(fu != null)
             {
-                Source = new BitmapImage(new Uri("Resources/mine-blown.png", UriKind.Relative)),
-                VerticalAlignment = VerticalAlignment.Center
-            };
+                fu.IsEnabled = false;
+                // Attaches mine-blown image to the button
+                fu.Content = new Image
+                {
+                    Source = new BitmapImage(new Uri("Resources/mine-blown.png", UriKind.Relative)),
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+            }
 
             // Show other mines and disable filed units
             foreach (FieldUnit funit in listOfUnits)
@@ -479,6 +483,8 @@ namespace Minesweeper
         {
             timer++;
             txtTimer.Text = timer.ToString();
+            if (timer == 999)
+                gameOver();     
         }
     }
 }
