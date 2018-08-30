@@ -54,7 +54,7 @@ namespace Minesweeper
                 Text = "Name: ",
                 FontFamily = new FontFamily("Verdana"),
                 FontSize = 20,
-                Foreground = new SolidColorBrush(Colors.DimGray),
+                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#303030")),
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Bottom
             };
@@ -77,7 +77,7 @@ namespace Minesweeper
                 Text = "Difficulty:",
                 FontFamily = new FontFamily("Verdana"),
                 FontSize = 20,
-                Foreground = new SolidColorBrush(Colors.DimGray),
+                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#303030")),
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Bottom
             };

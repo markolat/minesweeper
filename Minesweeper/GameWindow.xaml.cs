@@ -119,7 +119,7 @@ namespace Minesweeper
             Border border = new Border
             {
                 BorderThickness = new Thickness(2),
-                BorderBrush = new SolidColorBrush(Colors.Gray),
+                BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#303030")),
                 Child = Field
             };
 
@@ -141,7 +141,6 @@ namespace Minesweeper
                 {
                     FieldUnit fu = new FieldUnit(false, 0, i, j);
                     listOfUnits.Add(fu);
-                    // fu.Background = new SolidColorBrush(Colors.LightGray);
                     fu.Style = FindResource("FieldUnitStyle") as Style;
                     Grid.SetRow(fu, i);
                     Grid.SetColumn(fu, j);

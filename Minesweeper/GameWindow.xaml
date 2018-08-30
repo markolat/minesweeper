@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Background="#F2FCFF"
+        Background="White"
         Title="Minesweeper" Icon="Resources/mine.png" Height="300" Width="400" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="btnSmileyStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="GhostWhite"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="2" BorderBrush="#3B3B3B" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="2" BorderBrush="#303030" CornerRadius="0" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -35,7 +35,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="2" BorderBrush="#3B3B3B" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="2" BorderBrush="#303030" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -94,9 +94,9 @@
                 Style="{StaticResource btnSmileyStyle}"/>
         <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
-                 IsEnabled="False" Foreground="Blue" BorderBrush="Blue" BorderThickness="2"/>
+                 IsEnabled="False" Foreground="Blue" BorderBrush="#303030" BorderThickness="2"/>
         <TextBox x:Name="txtTimer" Grid.Row="0" Grid.Column="2" Width="100" Height="50" Text="0"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                 FontSize="25" IsEnabled="False" Foreground="Red" BorderBrush="Blue" BorderThickness="2"/>
+                 FontSize="25" IsEnabled="False" Foreground="Red" BorderBrush="#303030" BorderThickness="2"/>
     </Grid>
 </Window>

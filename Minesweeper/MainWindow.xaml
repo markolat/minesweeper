@@ -5,17 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Background="#F2FCFF"
+        Background="White"
         Title="Minesweeper" Icon="Resources/mine.png" Height="500" Width="400" MinHeight="500" MinWidth="400">
     <Window.Resources>
         <Style x:Key="btnStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="GhostWhite"/>
+            <Setter Property="Foreground" Value="#303030"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="0" BorderBrush="LightGray" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="1" BorderBrush="#303030" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -30,12 +32,12 @@
         <Style x:Key="btnPlayStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Background" Value="LightGreen"/>
-            <Setter Property="Foreground" Value="DimGray"/>
+            <Setter Property="Background" Value="GhostWhite"/>
+            <Setter Property="Foreground" Value="#303030"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="2" CornerRadius="10" BorderBrush="DimGray" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="2" CornerRadius="10" BorderBrush="#303030" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -56,12 +58,12 @@
                                 <Grid Height="20" Width="20">
                                     <!--Define size of the Bullet-->
                                     <!--The two borders-->
-                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="DimGray" BorderThickness="2" CornerRadius="2" />
-                                    <Border CornerRadius="0" Margin="4" Name="RadioMark" Background="DimGray" Visibility="Hidden" />
+                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="#303030" BorderThickness="2" CornerRadius="2" />
+                                    <Border CornerRadius="0" Margin="4" Name="RadioMark" Background="#303030" Visibility="Hidden" />
                                 </Grid>
                             </BulletDecorator.Bullet>
                             <!--Text element-->
-                            <TextBlock Margin="3,1,0,0" Foreground="DimGray" FontFamily="Verdana" FontSize="18">
+                            <TextBlock Margin="3,1,0,0" Foreground="#303030" FontFamily="Verdana" FontSize="18">
                                 <ContentPresenter />
                             </TextBlock>
                         </BulletDecorator>
@@ -70,7 +72,7 @@
                             <Trigger Property="IsChecked" Value="true">
                                 <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
                                 <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="DimGray" />
+                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="#303030" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -95,19 +97,19 @@
           Value="true" />
             <Setter Property="FontFamily" Value="Verdana"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="DimGray"/>
+            <Setter Property="Foreground" Value="#303030"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
                         <Border Name="Border"
                 CornerRadius="2"
                 Padding="2"
-                BorderThickness="1">
+                BorderThickness="2">
                             <Border.Background>
-                                <SolidColorBrush Color="#F2FCFF" />
+                                <SolidColorBrush Color="White" />
                             </Border.Background>
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="DimGray" />
+                                <SolidColorBrush Color="#303030" />
                             </Border.BorderBrush>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -149,16 +151,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="54*"/>
+            <RowDefinition Height="80*"/>
             <RowDefinition Height="51*"/>
             <RowDefinition Height="364*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Foreground="DimGray" Background="LightBlue"
-               Style="{StaticResource btnStyle}" />
-        <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Foreground="DimGray" Background="LightGreen"
-               Style="{StaticResource btnStyle}" />
-        <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
-        <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="LightGreen"/>
-        <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,-66,0,337" Grid.RowSpan="3" Panel.ZIndex="-1"/>
+        <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
+        <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
+        <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
+        <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
+        <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,-50,0,321" Grid.RowSpan="3" Panel.ZIndex="-1"/>
     </Grid>
 </Window>
