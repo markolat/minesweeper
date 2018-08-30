@@ -94,9 +94,9 @@
                 Style="{StaticResource btnSmileyStyle}"/>
         <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
-                 IsEnabled="False" Foreground="Blue" BorderBrush="#303030" BorderThickness="2"/>
+                 IsEnabled="False" Foreground="#303030" BorderBrush="#303030" BorderThickness="2"/>
         <TextBox x:Name="txtTimer" Grid.Row="0" Grid.Column="2" Width="100" Height="50" Text="0"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                 FontSize="25" IsEnabled="False" Foreground="Red" BorderBrush="#303030" BorderThickness="2"/>
+                 FontSize="25" IsEnabled="False" Foreground="DarkGreen" BorderBrush="#303030" BorderThickness="2"/>
     </Grid>
 </Window>

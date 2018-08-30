@@ -486,6 +486,12 @@ namespace Minesweeper
         {
             timer++;
             txtTimer.Text = timer.ToString();
+            if (timer > 500)
+                txtTimer.Foreground = new SolidColorBrush(Colors.Orange);
+            if (timer > 700)
+                txtTimer.Foreground = new SolidColorBrush(Colors.OrangeRed);
+            if (timer > 900)
+                txtTimer.Foreground = new SolidColorBrush(Colors.Red);
             if (timer == 999)
                 gameOver();     
         }
