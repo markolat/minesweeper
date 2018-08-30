@@ -132,5 +132,8 @@
   <ItemGroup>
     <Resource Include="Resources\Smiley-dead.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Minesweeper-logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

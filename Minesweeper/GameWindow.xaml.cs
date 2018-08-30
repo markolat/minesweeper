@@ -152,6 +152,8 @@ namespace Minesweeper
 
                     fu.PreviewMouseLeftButtonDown += delegate
                     {
+                        if (fu.Flag)
+                            return;
                         btnSmiley.Content = smiley_click;
                     };
 

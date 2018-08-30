@@ -159,5 +159,6 @@
                Style="{StaticResource btnStyle}" />
         <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
         <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="LightGreen"/>
+        <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,-66,0,337" Grid.RowSpan="3" Panel.ZIndex="-1"/>
     </Grid>
 </Window>
