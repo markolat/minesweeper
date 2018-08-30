@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
+        Background="#F2FCFF"
         Title="Minesweeper" Icon="Resources/mine.png" Height="300" Width="400" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="btnSmileyStyle" TargetType="Button">
@@ -79,11 +80,10 @@
             <Setter Property="FontSize" Value="30" />
         </Style>
     </Window.Resources>
-    <Grid Name="mainGrid">
+    <Grid Name="mainGrid" MaxWidth="660" MaxHeight="660">
         <Grid.RowDefinitions>
-            <RowDefinition Name="ControlBar" Height="0.15*"></RowDefinition>
-            <RowDefinition Name="FieldRow" Height="*">
-            </RowDefinition>
+            <RowDefinition Name="ControlBar" Height="0.15*"/>
+            <RowDefinition Name="FieldRow" Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

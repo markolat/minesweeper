@@ -45,6 +45,7 @@ namespace Minesweeper
         // Constructor
         public GameWindow(Window mainWindow, string difficulty, string gamerName): this()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             this.mainWindow = mainWindow;
             this.mainWindow.Hide();
             Field = new Grid();
@@ -60,15 +61,15 @@ namespace Minesweeper
             // Setting attributes regarding the choosen difficulty
             switch (difficulty)
             {
-                case "easy":
+                case "Easy":
                     this.fieldWidth = 10;
                     this.bombNumber = 15; // change it later to 30 (Project conditions :S)
                     break;
-                case "medium":
+                case "Medium":
                     this.fieldWidth = 12;
                     this.bombNumber = 25; // change it to 45
                     break;
-                case "hard":
+                case "Hard":
                     this.fieldWidth = 14;
                     this.bombNumber = 35; // change it to 60
                     break;
@@ -123,6 +124,7 @@ namespace Minesweeper
             };
 
             this.frame.Content = border;
+            this.frame.Background = new SolidColorBrush(Colors.White);
             Grid.SetRow(this.frame, 1);
             Grid.SetColumn(this.frame, 0);
             Grid.SetColumnSpan(this.frame, 3);

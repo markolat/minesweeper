@@ -5,18 +5,159 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="Minesweeper" Icon="Resources/mine.png" Height="350" Width="550">
-    <Grid RenderTransformOrigin="0.482,0.487">
+        Background="#F2FCFF"
+        Title="Minesweeper" Icon="Resources/mine.png" Height="500" Width="400" MinHeight="500" MinWidth="400">
+    <Window.Resources>
+        <Style x:Key="btnStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="LightGray" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnPlayStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="DimGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="2" CornerRadius="10" BorderBrush="DimGray" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="radioButtonStyle" TargetType="{x:Type RadioButton}" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent" Cursor="Hand">
+                            <BulletDecorator.Bullet>
+                                <Grid Height="20" Width="20">
+                                    <!--Define size of the Bullet-->
+                                    <!--The two borders-->
+                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="DimGray" BorderThickness="2" CornerRadius="2" />
+                                    <Border CornerRadius="0" Margin="4" Name="RadioMark" Background="DimGray" Visibility="Hidden" />
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <!--Text element-->
+                            <TextBlock Margin="3,1,0,0" Foreground="DimGray" FontFamily="Verdana" FontSize="18">
+                                <ContentPresenter />
+                            </TextBlock>
+                        </BulletDecorator>
+                        <!--If item is checked, trigger the visibility of the mark-->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="DimGray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="textBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+            <Setter Property="OverridesDefaultStyle"
+          Value="True" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+          Value="None" />
+            <Setter Property="FocusVisualStyle"
+          Value="{x:Null}" />
+            <Setter Property="MinWidth"
+          Value="150" />
+            <Setter Property="MaxWidth" Value="150"/>
+            <Setter Property="MinHeight"
+          Value="30" />
+            <Setter Property="AllowDrop"
+          Value="true" />
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="DimGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border"
+                CornerRadius="2"
+                Padding="2"
+                BorderThickness="1">
+                            <Border.Background>
+                                <SolidColorBrush Color="#F2FCFF" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="DimGray" />
+                            </Border.BorderBrush>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                                                        (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                                Value="{DynamicResource DisabledControlLightColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ReadOnly">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                    (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="{DynamicResource DisabledControlDarkColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ScrollViewer Margin="0"
+                        x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid MaxWidth="400" MaxHeight="500">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="208*"/>
-            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock TextAlignment="Center" FontSize="20" FontWeight="700" Margin="164,41,52.445,248" TextWrapping="Wrap" Text="MINESWEEPER" Height="30" Width="200"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="203,144,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="215,123,0,0" TextWrapping="Wrap" Text="Enter your name:" VerticalAlignment="Top" FontWeight="600"/>
-        <Button x:Name="btnEasy" Content="Easy" HorizontalAlignment="Left" Margin="110,240,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnMedium" Content="Medium" HorizontalAlignment="Left" Margin="230,240,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnHard" Content="Hard" HorizontalAlignment="Left" Margin="349,240,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="364*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Foreground="DimGray" Background="LightBlue"
+               Style="{StaticResource btnStyle}" />
+        <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Foreground="DimGray" Background="LightGreen"
+               Style="{StaticResource btnStyle}" />
+        <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
+        <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="LightGreen"/>
     </Grid>
 </Window>

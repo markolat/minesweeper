@@ -20,10 +20,10 @@ namespace Minesweeper
         {
             this.bomb = bomb;
             this.nearbyBombs = nearbyBombs;
-            this.flag = false;
-            this.opened = false;
-            this.row = i;
-            this.col = j;
+            flag = false;
+            opened = false;
+            row = i;
+            col = j;
         }
 
         // getters & setters
