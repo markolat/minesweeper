@@ -11,11 +11,11 @@
         <Style x:Key="btnSmileyStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Background" Value="GhostWhite"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="2" BorderBrush="#303030" CornerRadius="0" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="0" BorderBrush="#303030" CornerRadius="30" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -90,7 +90,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="50" Height="50" Click="btnSmiley_Click"
+        <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="60" Height="60" Click="btnSmiley_Click"
                 Style="{StaticResource btnSmileyStyle}"/>
         <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"

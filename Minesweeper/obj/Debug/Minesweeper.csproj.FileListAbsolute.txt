@@ -30,3 +30,5 @@ D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompileInputs.
 D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
 D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
 D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
+D:\repos\Minesweeper\Minesweeper\obj\Debug\GameWindow.baml
+D:\repos\Minesweeper\Minesweeper\obj\Debug\MainWindow.baml
