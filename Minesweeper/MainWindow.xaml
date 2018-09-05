@@ -158,8 +158,12 @@
             </Grid.RowDefinitions>
             <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
             <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
-            <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
-            <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="25" CornerRadius="20">
+                <Frame x:Name="gameFrame"   Background="Transparent"/>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="25" CornerRadius="20">
+                <Frame x:Name="scoreboardFrame" Background="Transparent"/>
+            </Border>
             <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="29,-112,0,20" Panel.ZIndex="-1" HorizontalAlignment="Left" Width="337" Height="168" VerticalAlignment="Bottom"/>
         </Grid>
     </Border>
