@@ -25,6 +25,8 @@ namespace Minesweeper
         private string name;
         private string difficulty;
         private TextBox nameTextBox;
+        private StackPanel spScores;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,9 +36,9 @@ namespace Minesweeper
             gFrame = gameFrame;
             sbFrame = scoreboardFrame;
             sbFrame.Visibility = Visibility.Hidden;
+            difficulty = "Easy";
             createGameControls();
             createScoreboardControls();
-            difficulty = "Easy";
         }
 
         // Creating controls for the game segment
@@ -174,8 +176,7 @@ namespace Minesweeper
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Top,
-                Height = 100
+                VerticalAlignment = VerticalAlignment.Top
             };
 
             RadioButton rdb1 = new RadioButton
@@ -209,6 +210,22 @@ namespace Minesweeper
             Grid.SetRow(sp, 1);
             Grid.SetColumn(sp, 1);
             sbSectionGrid.Children.Add(sp);
+
+            spScores = new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            for(int i = 0; i < 10; i++)
+            {
+                spScores.Children.Add(new TextBlock { Text = new Score("Jon Doe", difficulty, 555).ToString(), FontSize = 15 });
+            }
+
+            Grid.SetRow(spScores, 2);
+            Grid.SetColumn(spScores, 0);
+            sbSectionGrid.Children.Add(spScores);
 
             sbFrame.Content = sbSectionGrid;
         }
