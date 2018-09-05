@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Background="White"
-        Title="Minesweeper" Icon="Resources/mine.png" Height="500" Width="400" MinHeight="500" MinWidth="400">
+        Title="Minesweeper" Icon="Resources/mine.png" Height="600" Width="400" MinHeight="600" MinWidth="400">
     <Window.Resources>
         <Style x:Key="btnStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />

@@ -35,6 +35,7 @@ namespace Minesweeper
             sbFrame = scoreboardFrame;
             sbFrame.Visibility = Visibility.Hidden;
             createGameControls();
+            createScoreboardControls();
             difficulty = "Easy";
         }
 
@@ -56,7 +57,7 @@ namespace Minesweeper
                 FontSize = 20,
                 Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#303030")),
                 HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Bottom
+                VerticalAlignment = VerticalAlignment.Center
             };
             Grid.SetRow(nameText, 0);
             Grid.SetColumn(nameText, 0);
@@ -66,7 +67,7 @@ namespace Minesweeper
             {
                 Style = FindResource("textBoxStyle") as Style,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Bottom
+                VerticalAlignment = VerticalAlignment.Center
             };
             Grid.SetRow(nameTextBox, 0);
             Grid.SetColumn(nameTextBox, 1);
@@ -79,7 +80,7 @@ namespace Minesweeper
                 FontSize = 20,
                 Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#303030")),
                 HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Bottom
+                VerticalAlignment = VerticalAlignment.Center
             };
             Grid.SetRow(difficultyText, 1);
             Grid.SetColumn(difficultyText, 0);
@@ -90,7 +91,7 @@ namespace Minesweeper
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Top
             };
 
             RadioButton rdb1 = new RadioButton
@@ -100,7 +101,7 @@ namespace Minesweeper
                 Margin = new Thickness(0),
                 IsChecked = true
             };
-            rdb1.Click += radiobutton_checked;
+            rdb1.Click += radiobutton_difficulty_change;
             sp.Children.Add(rdb1);
 
             RadioButton rdb2 = new RadioButton
@@ -109,7 +110,7 @@ namespace Minesweeper
                 Style = FindResource("radioButtonStyle") as Style,
                 Margin = new Thickness(20, 0, 0, 0)
             };
-            rdb2.Click += radiobutton_checked;
+            rdb2.Click += radiobutton_difficulty_change;
             sp.Children.Add(rdb2);
 
             RadioButton rdb3 = new RadioButton
@@ -118,7 +119,7 @@ namespace Minesweeper
                 Style = FindResource("radioButtonStyle") as Style,
                 Margin = new Thickness(20, 0, 0, 0)
             };
-            rdb3.Click += radiobutton_checked;
+            rdb3.Click += radiobutton_difficulty_change;
             sp.Children.Add(rdb3);
 
             Grid.SetRow(sp, 2);
@@ -133,7 +134,9 @@ namespace Minesweeper
                 FontFamily = new FontFamily("Verdana"),
                 FontSize = 20,
                 Width = 150,
-                Height = 50
+                Height = 50,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top
             };
             btnPlay.Click += btnPlay_click;
 
@@ -143,6 +146,71 @@ namespace Minesweeper
             gameSectionGrid.Children.Add(btnPlay);
 
             gFrame.Content = gameSectionGrid;
+        }
+
+        // Creating controls for the scoreboard segment
+        private void createScoreboardControls()
+        {
+            Grid sbSectionGrid = new Grid();
+            sbSectionGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(50)});
+            sbSectionGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(30)});
+            sbSectionGrid.RowDefinitions.Add(new RowDefinition());
+
+            TextBlock category = new TextBlock
+            {
+                Text = "Category: ",
+                FontFamily = new FontFamily("Verdana"),
+                FontSize = 20,
+                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#303030")),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0, 10, 0, 0)
+            };
+            Grid.SetRow(category, 0);
+            Grid.SetColumn(category, 0);
+            sbSectionGrid.Children.Add(category);
+
+            StackPanel sp = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top,
+                Height = 100
+            };
+
+            RadioButton rdb1 = new RadioButton
+            {
+                Content = "Easy",
+                Style = FindResource("radioButtonStyle") as Style,
+                Margin = new Thickness(0),
+                IsChecked = true
+            };
+            rdb1.Click += radiobutton_difficulty_change;
+            sp.Children.Add(rdb1);
+
+            RadioButton rdb2 = new RadioButton
+            {
+                Content = "Medium",
+                Style = FindResource("radioButtonStyle") as Style,
+                Margin = new Thickness(20, 0, 0, 0)
+            };
+            rdb2.Click += radiobutton_difficulty_change;
+            sp.Children.Add(rdb2);
+
+            RadioButton rdb3 = new RadioButton
+            {
+                Content = "Hard",
+                Style = FindResource("radioButtonStyle") as Style,
+                Margin = new Thickness(20, 0, 0, 0)
+            };
+            rdb3.Click += radiobutton_difficulty_change;
+            sp.Children.Add(rdb3);
+
+            Grid.SetRow(sp, 1);
+            Grid.SetColumn(sp, 1);
+            sbSectionGrid.Children.Add(sp);
+
+            sbFrame.Content = sbSectionGrid;
         }
 
         // Game/Scoreboard button click
@@ -161,8 +229,8 @@ namespace Minesweeper
             }
         }
 
-        // Radio button check event
-        private void radiobutton_checked(object sender, System.EventArgs e)
+        // Radio button check event that changes difficulty level in game segment
+        private void radiobutton_difficulty_change(object sender, System.EventArgs e)
         {
             RadioButton rdb = sender as RadioButton;
             difficulty = rdb.Content.ToString();
