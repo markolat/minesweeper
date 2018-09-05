@@ -145,20 +145,22 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid MaxWidth="400" MaxHeight="500">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="51*"/>
-            <RowDefinition Height="364*"/>
-        </Grid.RowDefinitions>
-        <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
-        <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
-        <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
-        <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
-        <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="27,-42,27,342" Grid.RowSpan="3" Panel.ZIndex="-1"/>
-    </Grid>
+    <Border BorderThickness="0.1" BorderBrush="#303030" MaxWidth="500" MaxHeight="600">
+        <Grid MaxWidth="400" MaxHeight="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="51*"/>
+                <RowDefinition Height="364*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
+            <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
+            <Frame x:Name="gameFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
+            <Frame x:Name="scoreboardFrame"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White"/>
+            <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="29,-112,0,20" Panel.ZIndex="-1" HorizontalAlignment="Left" Width="337" Height="168" VerticalAlignment="Bottom"/>
+        </Grid>
+    </Border>
 </Window>

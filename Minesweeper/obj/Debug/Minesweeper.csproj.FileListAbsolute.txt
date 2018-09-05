@@ -29,6 +29,6 @@ D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.GenerateResource.C
 D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompileInputs.cache
 D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
 D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
-D:\repos\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csprojResolveAssemblyReference.cache
 D:\repos\Minesweeper\Minesweeper\obj\Debug\GameWindow.baml
 D:\repos\Minesweeper\Minesweeper\obj\Debug\MainWindow.baml
+D:\repos\minesweeper\Minesweeper\obj\Debug\Minesweeper.csprojAssemblyReference.cache

@@ -80,23 +80,25 @@
             <Setter Property="FontSize" Value="30" />
         </Style>
     </Window.Resources>
-    <Grid Name="mainGrid" MaxWidth="660" MaxHeight="660">
-        <Grid.RowDefinitions>
-            <RowDefinition Name="ControlBar" Height="0.15*"/>
-            <RowDefinition Name="FieldRow" Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="60" Height="60" Click="btnSmiley_Click"
-                Style="{StaticResource btnSmileyStyle}"/>
-        <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
-                 IsEnabled="False" Foreground="#303030" BorderBrush="#303030" BorderThickness="2"/>
-        <TextBox x:Name="txtTimer" Grid.Row="0" Grid.Column="2" Width="100" Height="50" Text="0"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                 FontSize="25" IsEnabled="False" Foreground="DarkGreen" BorderBrush="#303030" BorderThickness="2"/>
-    </Grid>
+    <Border BorderThickness="0.1" BorderBrush="#303030" MaxWidth="700" MaxHeight=" 700">
+        <Grid Name="mainGrid" MaxWidth="660" MaxHeight="660">
+            <Grid.RowDefinitions>
+                <RowDefinition Name="ControlBar" Height="0.15*"/>
+                <RowDefinition Name="FieldRow" Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnSmiley" Grid.Row="0" Grid.Column="1" Width="60" Height="60" Click="btnSmiley_Click"
+                    Style="{StaticResource btnSmileyStyle}"/>
+            <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"
+                     IsEnabled="False" Foreground="#303030" BorderBrush="#303030" BorderThickness="2"/>
+            <TextBox x:Name="txtTimer" Grid.Row="0" Grid.Column="2" Width="100" Height="50" Text="0"
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                     FontSize="25" IsEnabled="False" Foreground="DarkGreen" BorderBrush="#303030" BorderThickness="2"/>
+        </Grid>
+    </Border>
 </Window>
