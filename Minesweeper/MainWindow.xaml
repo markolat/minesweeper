@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Background="White"
-        Title="Minesweeper" Icon="Resources/mine.png" Height="600" Width="400" MinHeight="600" MinWidth="400">
+        Title="Minesweeper" Icon="Resources/mine.png" Height="600" Width="500" MinHeight="600" MinWidth="500">
     <Window.Resources>
         <Style x:Key="btnStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -158,7 +158,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
             <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="25" CornerRadius="20">
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="12" CornerRadius="20">
                 <Grid x:Name="gameGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -171,8 +171,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Name: " FontFamily="Verdana"
-                               FontSize="20" Foreground="#303030"/>
-                    <TextBox x:Name="nameTextBox" Style="{StaticResource textBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                               FontSize="20" Foreground="#303030" Margin="30, 0, 0, 0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="(name is required) " FontFamily="Verdana"
+                               FontSize="10" Foreground="#303030"/>
+                    <TextBox x:Name="nameTextBox" Style="{StaticResource textBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Difficulty:" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontFamily="Verdana" FontSize="20" Foreground="#303030"/>
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -181,10 +183,10 @@
                         <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
                     </StackPanel>
                     <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Play" Style="{StaticResource btnPlayStyle}" Width="150" Height="50"
-                            FontFamily="Verdana" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnPlay_click"/>
+                            FontFamily="Verdana" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnPlay_click"/>
                 </Grid>
             </Border>
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="25" CornerRadius="20">
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="12" CornerRadius="20">
                 <Grid x:Name="scoreboardGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

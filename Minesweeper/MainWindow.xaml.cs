@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Minesweeper
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private Grid gGrid;
@@ -36,6 +33,7 @@ namespace Minesweeper
             sbGrid.Visibility = Visibility.Hidden;
             difficulty = "Easy";
             justChecking();
+            MessageBox.Show("Congratulations! You won! :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.None);
         }
 
         // Creating controls for the scoreboard segment

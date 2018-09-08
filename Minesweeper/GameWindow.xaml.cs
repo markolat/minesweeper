@@ -63,15 +63,15 @@ namespace Minesweeper
             {
                 case "Easy":
                     this.fieldWidth = 10;
-                    this.bombNumber = 15; // change it later to 30 (Project conditions :S)
+                    this.bombNumber = 15;
                     break;
                 case "Medium":
                     this.fieldWidth = 12;
-                    this.bombNumber = 25; // change it to 45
+                    this.bombNumber = 25;
                     break;
                 case "Hard":
                     this.fieldWidth = 14;
-                    this.bombNumber = 35; // change it to 60
+                    this.bombNumber = 35;
                     break;
                 default:
                     break;
@@ -385,7 +385,7 @@ namespace Minesweeper
         }
 
         // Checking if all field units that does not have mine are opened
-        private Boolean AllOpened()
+        private bool AllOpened()
         {
             foreach(FieldUnit fu in listOfUnits)
             {
@@ -421,6 +421,7 @@ namespace Minesweeper
                 Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
                 VerticalAlignment = VerticalAlignment.Center
             };
+            MessageBox.Show("Congratulations! You won! :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.None);
         }
 
         // Setting the color style for textblock controls
