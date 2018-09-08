@@ -421,7 +421,30 @@ namespace Minesweeper
                 Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
                 VerticalAlignment = VerticalAlignment.Center
             };
+   
             MessageBox.Show("Congratulations! You won! :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.None);
+
+            // Creating new score and filename
+            Score newScore = new Score(gamerName, difficulty, timer);
+            string fileName = "sb" + difficulty;
+
+            // Reading and writing list of scores to the file
+            if (File.Exists(fileName))
+            {
+                List<Score> listOfScores = Score.ReadScores(fileName);
+                listOfScores.Add(newScore);
+                listOfScores.Sort();
+                listOfScores.RemoveAt(10);
+                Score.WriteScores(listOfScores, fileName);
+            }
+            else
+            {
+                List<Score> listOfScores = new List<Score>();
+                listOfScores.Add(newScore);
+                for (int i = 0; i < 9; i++)
+                    listOfScores.Add(new Score());
+                Score.WriteScores(listOfScores, fileName);
+            }
         }
 
         // Setting the color style for textblock controls
@@ -433,7 +456,7 @@ namespace Minesweeper
                     tb.Text = "";
                     break;
                 case "1":
-                    tb.Style = FindResource("StyleLightBlue") as Style;
+                    tb.Style = FindResource("StyleBlue") as Style;
                     break;
                 case "2":
                     tb.Style = FindResource("StyleGreen") as Style;

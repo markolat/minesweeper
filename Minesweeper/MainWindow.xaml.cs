@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,7 @@ namespace Minesweeper
         private Grid sbGrid;
         private string name;
         private string difficulty;
+        private List<Score> listOfScores; 
 
         public MainWindow()
         {
@@ -32,17 +35,6 @@ namespace Minesweeper
             sbGrid = scoreboardGrid;
             sbGrid.Visibility = Visibility.Hidden;
             difficulty = "Easy";
-            justChecking();
-            MessageBox.Show("Congratulations! You won! :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.None);
-        }
-
-        // Creating controls for the scoreboard segment
-        private void justChecking()
-        {
-            for(int i = 0; i < 10; i++)
-            {
-                spScores.Children.Add(new TextBlock { Text = new Score("Jon Doe", difficulty, 555).ToString(), FontSize = 15 });
-            }
         }
 
         // Game/Scoreboard button click
@@ -73,6 +65,33 @@ namespace Minesweeper
         {
             name = nameTextBox.Text;
             new GameWindow(this, difficulty, name).Show();
+        }
+
+        // Radio button check event that changes category in scoreboard segment
+        private void radiobutton_category_change(object sender, System.EventArgs e)
+        {
+            RadioButton rdb = sender as RadioButton;
+            string category = rdb.Content.ToString();
+            switch (category)
+            {
+                case "Easy":
+                    spScoresEasy.Visibility = Visibility.Visible;
+                    spScoresMedium.Visibility = Visibility.Hidden;
+                    spScoresHard.Visibility = Visibility.Hidden;
+                    break;
+                case "Medium":
+                    spScoresEasy.Visibility = Visibility.Hidden;
+                    spScoresMedium.Visibility = Visibility.Visible;
+                    spScoresHard.Visibility = Visibility.Hidden;
+                    break;
+                case "Hard":
+                    spScoresEasy.Visibility = Visibility.Hidden;
+                    spScoresMedium.Visibility = Visibility.Hidden;
+                    spScoresHard.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

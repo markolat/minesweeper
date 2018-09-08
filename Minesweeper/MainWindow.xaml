@@ -17,7 +17,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="1" BorderBrush="#303030" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="1" BorderBrush="#303030" CornerRadius="10" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -102,7 +102,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
                         <Border Name="Border"
-                CornerRadius="2"
+                CornerRadius="10"
                 Padding="2"
                 BorderThickness="2">
                             <Border.Background>
@@ -145,68 +145,95 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Border BorderThickness="0.1" BorderBrush="#303030" MaxWidth="500" MaxHeight="600">
-        <Grid MaxWidth="400" MaxHeight="600">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80*"/>
-                <RowDefinition Height="51*"/>
-                <RowDefinition Height="364*"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
-            <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="12" CornerRadius="20">
-                <Grid x:Name="gameGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Name: " FontFamily="Verdana"
+    <Grid MaxWidth="400" MaxHeight="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="364*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnGame" Grid.Row="1" Grid.Column="0" Content="Game" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
+        <Button x:Name="btnScoreboard" Grid.Row="1" Grid.Column="1" Content="Scoreboard" FontFamily="Verdana" FontSize="20" Style="{StaticResource btnStyle}" />
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="12" CornerRadius="20">
+            <Grid x:Name="gameGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Name: " FontFamily="Verdana"
                                FontSize="20" Foreground="#303030" Margin="30, 0, 0, 0"/>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="(name is required) " FontFamily="Verdana"
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="(name is required) " FontFamily="Verdana"
                                FontSize="10" Foreground="#303030"/>
-                    <TextBox x:Name="nameTextBox" Style="{StaticResource textBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Difficulty:" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <TextBox x:Name="nameTextBox" Style="{StaticResource textBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Difficulty:" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontFamily="Verdana" FontSize="20" Foreground="#303030"/>
-                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                        <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_difficulty_change"/>
-                        <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
-                        <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
-                    </StackPanel>
-                    <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Play" Style="{StaticResource btnPlayStyle}" Width="150" Height="50"
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_difficulty_change"/>
+                    <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
+                    <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
+                </StackPanel>
+                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Play" Style="{StaticResource btnPlayStyle}" Width="150" Height="50"
                             FontFamily="Verdana" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnPlay_click"/>
-                </Grid>
-            </Border>
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="12" CornerRadius="20">
-                <Grid x:Name="scoreboardGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Category:" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0" FontFamily="Verdana"
+            </Grid>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="12" CornerRadius="20">
+            <Grid x:Name="scoreboardGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Category:" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0" FontFamily="Verdana"
                                FontSize="20" Foreground="#303030"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-                        <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True"/>
-                        <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0"/>
-                        <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0"/>
-                    </StackPanel>
-                    <StackPanel x:Name="spScores" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"/>
-                </Grid>
-            </Border>
-            <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="29,-112,0,20" Panel.ZIndex="-1" HorizontalAlignment="Left" Width="337" Height="168" VerticalAlignment="Bottom"/>
-        </Grid>
-    </Border>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_category_change"/>
+                    <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_category_change"/>
+                    <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_category_change"/>
+                </StackPanel>
+                <StackPanel x:Name="spScoresEasy" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="0, 10, 0, 0"/>
+                            <Setter Property="Foreground" Value="#303030"/>
+                            <Setter Property="FontFamily" Value="Verdana"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </StackPanel.Resources>
+                </StackPanel>
+                <StackPanel x:Name="spScoresMedium" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="0, 10, 0, 0"/>
+                            <Setter Property="Foreground" Value="#303030"/>
+                            <Setter Property="FontFamily" Value="Verdana"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </StackPanel.Resources>
+                </StackPanel>
+                <StackPanel x:Name="spScoresHard" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="0, 10, 0, 0"/>
+                            <Setter Property="Foreground" Value="#303030"/>
+                            <Setter Property="FontFamily" Value="Verdana"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </StackPanel.Resources>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Image x:Name="minesweeperLogo" Source="Resources/Minesweeper-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="32,-103,0,27" Panel.ZIndex="-1" HorizontalAlignment="Left" Width="337" Height="168" VerticalAlignment="Bottom"/>
+    </Grid>
 </Window>
