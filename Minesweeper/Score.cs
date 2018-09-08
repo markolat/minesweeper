@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Minesweeper
 {
+    [Serializable()]
     class Score : IComparable<Score>
     {
         private string playerName;
@@ -30,6 +31,8 @@ namespace Minesweeper
             this.difficultyLevel = difficultyLevel;
             this.score_time = score_time;
         }
+
+        public int Score_time { get { return score_time; } }
 
         // Serialization of list of Score objects
         public static void WriteScores(List<Score> listOfScores, string fileName)

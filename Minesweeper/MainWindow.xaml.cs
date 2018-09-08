@@ -23,7 +23,6 @@ namespace Minesweeper
         private Grid sbGrid;
         private string name;
         private string difficulty;
-        private List<Score> listOfScores; 
 
         public MainWindow()
         {
@@ -35,6 +34,8 @@ namespace Minesweeper
             sbGrid = scoreboardGrid;
             sbGrid.Visibility = Visibility.Hidden;
             difficulty = "Easy";
+            updateScoreBoardSP(difficulty);
+            spScoresEasy.Visibility = Visibility.Visible;
         }
 
         // Game/Scoreboard button click
@@ -75,19 +76,75 @@ namespace Minesweeper
             switch (category)
             {
                 case "Easy":
+                    updateScoreBoardSP(category);
                     spScoresEasy.Visibility = Visibility.Visible;
                     spScoresMedium.Visibility = Visibility.Hidden;
                     spScoresHard.Visibility = Visibility.Hidden;
                     break;
                 case "Medium":
+                    updateScoreBoardSP(category);
                     spScoresEasy.Visibility = Visibility.Hidden;
                     spScoresMedium.Visibility = Visibility.Visible;
                     spScoresHard.Visibility = Visibility.Hidden;
                     break;
                 case "Hard":
+                    updateScoreBoardSP(category);
                     spScoresEasy.Visibility = Visibility.Hidden;
                     spScoresMedium.Visibility = Visibility.Hidden;
                     spScoresHard.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void updateScoreBoardSP(string category)
+        {
+            string fileName = "sb" + category;
+            List<Score> listOfScores = new List<Score>();
+
+            if (File.Exists(fileName))
+            {
+                listOfScores.Clear();
+                listOfScores = Score.ReadScores(fileName);
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                    listOfScores.Add(new Score());
+            }
+
+            switch (category)
+            {
+                case "Easy":
+                    spScoresEasy.Children.Clear();
+                    foreach(Score score in listOfScores)
+                    {
+                        if (score.Score_time < 999)
+                            spScoresEasy.Children.Add(new TextBlock { Text = score.ToString() });
+                        else
+                            spScoresEasy.Children.Add(new TextBlock { Text = "N/A"});
+                    }
+                    break;
+                case "Medium":
+                    spScoresMedium.Children.Clear();
+                    foreach (Score score in listOfScores)
+                    {
+                        if (score.Score_time < 999)
+                            spScoresMedium.Children.Add(new TextBlock { Text = score.ToString() });
+                        else
+                            spScoresMedium.Children.Add(new TextBlock { Text = "N/A" });
+                    }
+                    break;
+                case "Hard":
+                    spScoresHard.Children.Clear();
+                    foreach (Score score in listOfScores)
+                    {
+                        if (score.Score_time < 999)
+                            spScoresHard.Children.Add(new TextBlock { Text = score.ToString() });
+                        else
+                            spScoresHard.Children.Add(new TextBlock { Text = "N/A" });
+                    }
                     break;
                 default:
                     break;

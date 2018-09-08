@@ -198,7 +198,7 @@
                 <TextBlock Grid.Row="0" Text="Category:" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0" FontFamily="Verdana"
                                FontSize="20" Foreground="#303030"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_category_change"/>
+                    <RadioButton x:Name="rdb1Category" Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_category_change"/>
                     <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_category_change"/>
                     <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_category_change"/>
                 </StackPanel>
