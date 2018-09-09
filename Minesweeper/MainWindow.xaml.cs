@@ -100,9 +100,10 @@ namespace Minesweeper
 
             spName.Children.Clear();
             spTime.Children.Clear();
+
             foreach (Score score in listOfScores)
             {
-                spName.Children.Add(new TextBlock { Text = "Name: " + score.PlayerName.ToString() });
+                spName.Children.Add(new TextBlock { Text = "Name: " + score.PlayerName });
                 if(score.Score_time == 999)
                      spTime.Children.Add(new TextBlock { Text = "Time: N/A" });
                 else

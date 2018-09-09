@@ -45,17 +45,17 @@ namespace Minesweeper
         {
             BinaryFormatter bf = new BinaryFormatter();
             fs = File.OpenRead(fileName);
-            List<Score> lista = bf.Deserialize(fs) as List<Score>;
+            List<Score> listOfScores = bf.Deserialize(fs) as List<Score>;
             fs.Dispose();
-            return lista;
+            return listOfScores;
         }
 
         // CompareTo method from comparable interface (used for Sort method on list of scores)
         public int CompareTo(Score other)
         {
-            if (this.Score_time < other.Score_time)
+            if (Score_time < other.Score_time)
                 return -1;
-            if (this.Score_time > other.Score_time)
+            if (Score_time > other.Score_time)
                 return 1;
             return 0;
         }
