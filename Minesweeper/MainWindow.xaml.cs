@@ -110,5 +110,16 @@ namespace Minesweeper
                     spTime.Children.Add(new TextBlock { Text = "Time: " + score.Score_time.ToString() });
             }    
         }
+
+        // When main window is shown do the update of scoreboard stackpanel
+        private void Window_Activated(object sender, System.EventArgs e)
+        {
+            if (rdbCategory1.IsChecked == true)
+                UpdateScoreBoard("Easy");
+            else if (rdbCategory2.IsChecked == true)
+                UpdateScoreBoard("Medium");
+            else
+                UpdateScoreBoard("Hard");
+        }
     }
 }

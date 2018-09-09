@@ -437,9 +437,6 @@ namespace Minesweeper
                     listOfScores.Add(new Score());
                 Score.WriteScores(listOfScores, fileName);
             }
-
-            // Updating scoreboard
-            MainWindow.UpdateScoreBoard(difficulty);
         }
 
         // Setting the color style for textblock controls
