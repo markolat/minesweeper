@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Minesweeper
 {
@@ -19,7 +17,7 @@ namespace Minesweeper
         // Default constructor
         public Score()
         {
-            playerName = "John Doe";
+            playerName = "N/A";
             difficultyLevel = "";
             score_time = 999;
         }
@@ -32,6 +30,8 @@ namespace Minesweeper
             this.score_time = score_time;
         }
 
+        // Getters
+        public string PlayerName { get { return playerName; } }
         public int Score_time { get { return score_time; } }
 
         // Serialization of list of Score objects
@@ -51,12 +51,6 @@ namespace Minesweeper
             List<Score> lista = bf.Deserialize(fs) as List<Score>;
             fs.Dispose();
             return lista;
-        }
-
-        // ToString method
-        public override string ToString()
-        {
-            return "Name: " + playerName + "       Time: " + score_time;
         }
 
         // CompareTo method from comparable interface

@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Minesweeper
 {
@@ -21,8 +10,10 @@ namespace Minesweeper
     {
         private Grid gGrid;
         private Grid sbGrid;
-        private string name;
+        private string playerName;
         private string difficulty;
+        private static StackPanel spName;
+        private static StackPanel spTime;
 
         public MainWindow()
         {
@@ -34,8 +25,9 @@ namespace Minesweeper
             sbGrid = scoreboardGrid;
             sbGrid.Visibility = Visibility.Hidden;
             difficulty = "Easy";
-            updateScoreBoardSP(difficulty);
-            spScoresEasy.Visibility = Visibility.Visible;
+            spName = spScoresName;
+            spTime = spScoresTime;
+            UpdateScoreBoard(difficulty);
         }
 
         // Game/Scoreboard button click
@@ -64,8 +56,13 @@ namespace Minesweeper
         // Play button click event
         private void btnPlay_click(object sender, System.EventArgs e)
         {
-            name = nameTextBox.Text;
-            new GameWindow(this, difficulty, name).Show();
+            playerName = nameTextBox.Text;
+            if (playerName.Equals(""))
+            {
+                MessageBox.Show("Name is required. Please, enter your name.", "Empty name field", MessageBoxButton.OK);
+                return;
+            }
+            new GameWindow(this, difficulty, playerName).Show();
         }
 
         // Radio button check event that changes category in scoreboard segment
@@ -76,79 +73,43 @@ namespace Minesweeper
             switch (category)
             {
                 case "Easy":
-                    updateScoreBoardSP(category);
-                    spScoresEasy.Visibility = Visibility.Visible;
-                    spScoresMedium.Visibility = Visibility.Hidden;
-                    spScoresHard.Visibility = Visibility.Hidden;
+                    UpdateScoreBoard(category);
                     break;
                 case "Medium":
-                    updateScoreBoardSP(category);
-                    spScoresEasy.Visibility = Visibility.Hidden;
-                    spScoresMedium.Visibility = Visibility.Visible;
-                    spScoresHard.Visibility = Visibility.Hidden;
+                    UpdateScoreBoard(category);
                     break;
                 case "Hard":
-                    updateScoreBoardSP(category);
-                    spScoresEasy.Visibility = Visibility.Hidden;
-                    spScoresMedium.Visibility = Visibility.Hidden;
-                    spScoresHard.Visibility = Visibility.Visible;
+                    UpdateScoreBoard(category);
                     break;
                 default:
                     break;
             }
         }
 
-        private void updateScoreBoardSP(string category)
+        // Method that updates scoreboard stackpanel with scores
+        public static void UpdateScoreBoard(string category)
         {
+            
             string fileName = "sb" + category;
             List<Score> listOfScores = new List<Score>();
 
             if (File.Exists(fileName))
-            {
-                listOfScores.Clear();
                 listOfScores = Score.ReadScores(fileName);
-            }
             else
-            {
                 for (int i = 0; i < 10; i++)
                     listOfScores.Add(new Score());
-            }
 
-            switch (category)
+            spName.Children.Clear();
+            spTime.Children.Clear();
+            foreach (Score score in listOfScores)
             {
-                case "Easy":
-                    spScoresEasy.Children.Clear();
-                    foreach(Score score in listOfScores)
-                    {
-                        if (score.Score_time < 999)
-                            spScoresEasy.Children.Add(new TextBlock { Text = score.ToString() });
-                        else
-                            spScoresEasy.Children.Add(new TextBlock { Text = "N/A"});
-                    }
-                    break;
-                case "Medium":
-                    spScoresMedium.Children.Clear();
-                    foreach (Score score in listOfScores)
-                    {
-                        if (score.Score_time < 999)
-                            spScoresMedium.Children.Add(new TextBlock { Text = score.ToString() });
-                        else
-                            spScoresMedium.Children.Add(new TextBlock { Text = "N/A" });
-                    }
-                    break;
-                case "Hard":
-                    spScoresHard.Children.Clear();
-                    foreach (Score score in listOfScores)
-                    {
-                        if (score.Score_time < 999)
-                            spScoresHard.Children.Add(new TextBlock { Text = score.ToString() });
-                        else
-                            spScoresHard.Children.Add(new TextBlock { Text = "N/A" });
-                    }
-                    break;
-                default:
-                    break;
+                spName.Children.Add(new TextBlock { Text = "Name: " + score.PlayerName.ToString() });
+                if(score.Score_time == 999)
+                     spTime.Children.Add(new TextBlock { Text = "Time: N/A" });
+                else
+                    spTime.Children.Add(new TextBlock { Text = "Time: " + score.Score_time.ToString() });
             }
+                
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Minesweeper
         private Image smiley;
         private Image smiley_click;
         private int fieldWidth;
-        private string gamerName;
+        private string playerName;
         private string difficulty;
         private int bombNumber;
         private int mineCounter;
@@ -51,7 +51,7 @@ namespace Minesweeper
             Field = new Grid();
             frame = new Frame();
             dTimer = new DispatcherTimer();
-            this.gamerName = gamerName;
+            this.playerName = gamerName;
             this.difficulty = difficulty;
             dTimer.Tick += dispatcherTimer_Tick;
             dTimer.Interval = new TimeSpan(0, 0, 1);
@@ -425,7 +425,7 @@ namespace Minesweeper
             MessageBox.Show("Congratulations! You won! :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.None);
 
             // Creating new score and filename
-            Score newScore = new Score(gamerName, difficulty, timer);
+            Score newScore = new Score(playerName, difficulty, timer);
             string fileName = "sb" + difficulty;
 
             // Reading and writing list of scores to the file
@@ -445,6 +445,7 @@ namespace Minesweeper
                     listOfScores.Add(new Score());
                 Score.WriteScores(listOfScores, fileName);
             }
+            MainWindow.UpdateScoreBoard(difficulty);
         }
 
         // Setting the color style for textblock controls
