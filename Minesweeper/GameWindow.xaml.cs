@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Collections;
 using System.IO;
 using System.Windows.Threading;
 
@@ -445,6 +437,8 @@ namespace Minesweeper
                     listOfScores.Add(new Score());
                 Score.WriteScores(listOfScores, fileName);
             }
+
+            // Updating scoreboard
             MainWindow.UpdateScoreBoard(difficulty);
         }
 
@@ -488,7 +482,7 @@ namespace Minesweeper
         // On closing event
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            dTimer.Stop(); // I'm not sure if i need to do this, but, i did it just in case
+            dTimer.Stop(); // I'm not sure if i need to do this, but i did it just in case
             this.mainWindow.Show();
         }
 

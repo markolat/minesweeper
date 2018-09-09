@@ -89,7 +89,6 @@ namespace Minesweeper
         // Method that updates scoreboard stackpanel with scores
         public static void UpdateScoreBoard(string category)
         {
-            
             string fileName = "sb" + category;
             List<Score> listOfScores = new List<Score>();
 
@@ -108,8 +107,7 @@ namespace Minesweeper
                      spTime.Children.Add(new TextBlock { Text = "Time: N/A" });
                 else
                     spTime.Children.Add(new TextBlock { Text = "Time: " + score.Score_time.ToString() });
-            }
-                
+            }    
         }
     }
 }

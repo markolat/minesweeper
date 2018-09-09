@@ -2,37 +2,34 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace Minesweeper
 {
     [Serializable()]
     class Score : IComparable<Score>
     {
-        private string playerName;
-        private string difficultyLevel;
-        private int score_time;
         private static FileStream fs;
 
         // Default constructor
         public Score()
         {
-            playerName = "N/A";
-            difficultyLevel = "";
-            score_time = 999;
+            PlayerName = "N/A";
+            DifficultyLevel = "";
+            Score_time = 999;
         }
 
         // Constructor with parameters
         public Score(string playerName, string difficultyLevel, int score_time)
         {
-            this.playerName = playerName;
-            this.difficultyLevel = difficultyLevel;
-            this.score_time = score_time;
+            PlayerName = playerName;
+            DifficultyLevel = difficultyLevel;
+            Score_time = score_time;
         }
 
         // Getters
-        public string PlayerName { get { return playerName; } }
-        public int Score_time { get { return score_time; } }
+        public string PlayerName { get; }
+        public int Score_time { get; }
+        public string DifficultyLevel { get; }
 
         // Serialization of list of Score objects
         public static void WriteScores(List<Score> listOfScores, string fileName)
@@ -53,12 +50,12 @@ namespace Minesweeper
             return lista;
         }
 
-        // CompareTo method from comparable interface
+        // CompareTo method from comparable interface (used for Sort method on list of scores)
         public int CompareTo(Score other)
         {
-            if (this.score_time < other.score_time)
+            if (this.Score_time < other.Score_time)
                 return -1;
-            if (this.score_time > other.score_time)
+            if (this.Score_time > other.Score_time)
                 return 1;
             return 0;
         }
