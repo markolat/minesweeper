@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 namespace Minesweeper
 {
@@ -17,6 +18,7 @@ namespace Minesweeper
         private DispatcherTimer dTimer;
         private Image smiley;
         private Image smiley_click;
+        private Storyboard sbExpand;
         private int fieldWidth;
         private string playerName;
         private string difficulty;
@@ -413,8 +415,9 @@ namespace Minesweeper
                 Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
                 VerticalAlignment = VerticalAlignment.Center
             };
-   
-            MessageBox.Show("Congratulations! You won! :)", "Congratulations", MessageBoxButton.OK, MessageBoxImage.None);
+
+            // Expanding the smiley button after game has been won
+            Smileybtn_animation();
 
             // Creating new score and filename
             Score newScore = new Score(playerName, difficulty, timer);
@@ -495,6 +498,40 @@ namespace Minesweeper
             timer = 0;
             txtTimer.Text = timer.ToString();
             btnSmiley.Content = smiley;
+            if (sbExpand != null)
+                sbExpand.Stop();
+            btnSmiley.Width = 60;
+            btnSmiley.Height = 60;
+            Grid.SetRow(btnSmiley, 0);
+            Grid.SetColumn(btnSmiley, 1);
+            Grid.SetColumnSpan(btnSmiley, 1);
+        }
+
+        // Smiley button animation after game has been won
+        private void Smileybtn_animation()
+        {
+            Grid.SetRow(btnSmiley, 1);
+            Grid.SetColumn(btnSmiley, 0);
+            Grid.SetColumnSpan(btnSmiley, 3);
+            DoubleAnimation daW = new DoubleAnimation(frame.Width, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
+            DoubleAnimation daH = new DoubleAnimation(frame.Height, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
+            // DoubleAnimation daX = new DoubleAnimation(200, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
+            // DoubleAnimation daY = new DoubleAnimation(200, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
+
+            sbExpand = new Storyboard();
+            // sbExpand.Children.Add(daX);
+            // sbExpand.Children.Add(daY);
+            sbExpand.Children.Add(daH);
+            sbExpand.Children.Add(daW);
+
+            Storyboard.SetTarget(sbExpand, btnSmiley);
+
+            Storyboard.SetTargetProperty(daW, new PropertyPath("Width"));
+            Storyboard.SetTargetProperty(daH, new PropertyPath("Height"));
+            //Storyboard.SetTargetProperty(daX, new PropertyPath("(0).(1)", new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.XProperty }));
+            //Storyboard.SetTargetProperty(daY, new PropertyPath("(0).(1)", new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty }));
+
+            sbExpand.Begin();
         }
 
         // Dispatcher timer functionality
