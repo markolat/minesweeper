@@ -1,4 +1,4 @@
-# Minesweeper game
+# MineSweeper game
 
 *Developed using C#, WPF Application*
 
