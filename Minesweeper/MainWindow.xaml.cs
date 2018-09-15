@@ -19,8 +19,8 @@ namespace Minesweeper
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            btnGame.Click += game_scoreboard_click;
-            btnScoreboard.Click += game_scoreboard_click;
+            btnGame.Click += Game_scoreboard_click;
+            btnScoreboard.Click += Game_scoreboard_click;
             gGrid = gameGrid;
             sbGrid = scoreboardGrid;
             sbGrid.Visibility = Visibility.Hidden;
@@ -31,7 +31,7 @@ namespace Minesweeper
         }
 
         // Game/Scoreboard button click
-        private void game_scoreboard_click(object sender, System.EventArgs e)
+        private void Game_scoreboard_click(object sender, System.EventArgs e)
         {
             Button btn = sender as Button;
             if(btn == btnGame)
@@ -47,14 +47,14 @@ namespace Minesweeper
         }
 
         // Radio button check event that changes difficulty level in game segment
-        private void radiobutton_difficulty_change(object sender, System.EventArgs e)
+        private void Radiobutton_difficulty_change(object sender, System.EventArgs e)
         {
             RadioButton rdb = sender as RadioButton;
             difficulty = rdb.Content.ToString();
         }
 
         // Play button click event
-        private void btnPlay_click(object sender, System.EventArgs e)
+        private void BtnPlay_click(object sender, System.EventArgs e)
         {
             playerName = nameTextBox.Text;
             if (playerName.Equals(""))
@@ -66,7 +66,7 @@ namespace Minesweeper
         }
 
         // Radio button check event that changes category in scoreboard segment
-        private void radiobutton_category_change(object sender, System.EventArgs e)
+        private void Radiobutton_category_change(object sender, System.EventArgs e)
         {
             RadioButton rdb = sender as RadioButton;
             string category = rdb.Content.ToString();

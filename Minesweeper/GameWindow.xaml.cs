@@ -47,12 +47,12 @@ namespace Minesweeper
             dTimer = new DispatcherTimer();
             this.playerName = gamerName;
             this.difficulty = difficulty;
-            dTimer.Tick += dispatcherTimer_Tick;
+            dTimer.Tick += DispatcherTimer_Tick;
             dTimer.Interval = new TimeSpan(0, 0, 1);
             timer = 0;
             listOfUnits = new List<FieldUnit>(this.bombNumber);
 
-            // Setting attributes regarding the choosen difficulty
+            // Setting attributes regarding the chosen difficulty
             switch (difficulty)
             {
                 case "Easy":
@@ -81,7 +81,7 @@ namespace Minesweeper
             this.MinWidth = this.frame.Width + 100;
             this.MinHeight = this.frame.Height + 200;
 
-            // Instantiating smiley images
+            // Instantiating smiley images that will change frequently
             smiley = new Image
             {
                 Source = new BitmapImage(new Uri("Resources/Smiley.png", UriKind.Relative)),
@@ -226,8 +226,9 @@ namespace Minesweeper
             if (fu.Flag)
                 return;
 
-            openField(fu);
-            // Here to check if all units that does not have mine are opened
+            OpenField(fu);
+
+            // Check if all units that does not have mine are opened
             if (AllOpened())
                 GameWon();
         }
@@ -264,7 +265,7 @@ namespace Minesweeper
         }
 
         // Recursive function that opens field units
-        private void openField(FieldUnit fu)
+        private void OpenField(FieldUnit fu)
         {
             fu.IsOpened = true;
 
@@ -279,7 +280,7 @@ namespace Minesweeper
 
             if (fu.Bomb)
             {
-                gameOver(fu);
+                GameOver(fu);
                 return;
             }
             else
@@ -287,7 +288,7 @@ namespace Minesweeper
                 tb.Text = fu.NearbyBombs.ToString();
             }
                 
-            setTbStyle(tb);
+            SetTbStyle(tb);
             Field.Children.Remove(fu);
             Border border = new Border
             {
@@ -299,7 +300,7 @@ namespace Minesweeper
             Grid.SetColumn(border, column);
             Field.Children.Add(border);
 
-            // Opening adjacent field units if condition is true
+            // Opening adjacent field units if field is empty
             if (fu.NearbyBombs == 0)
             {
                 for(int i = -1; i < 2; i++)
@@ -315,11 +316,11 @@ namespace Minesweeper
 
                         FieldUnit unit = FieldUnit.GetUnit(listOfUnits, r, c);
 
-                        // If it's already open or it's marked with flag, continue
+                        // If it's already open or if it's marked with flag, continue
                         if (unit.IsOpened || unit.Flag)
                             continue;
                         else
-                            openField(unit);
+                            OpenField(unit);
                     }
                 }
             }
@@ -328,7 +329,7 @@ namespace Minesweeper
         }
 
         // Ending the game (stepped on mine)
-        private void gameOver(FieldUnit fu=null)
+        private void GameOver(FieldUnit fu=null)
         {
             dTimer.Stop();
 
@@ -358,6 +359,7 @@ namespace Minesweeper
                         VerticalAlignment = VerticalAlignment.Center
                     };
                 }
+                // If unit does not containt bomb and has a flag marker, put notMine image to it
                 else
                 {
                     if (funit.Flag)
@@ -371,6 +373,7 @@ namespace Minesweeper
                 }
             }
 
+            // Putting dead smiley face on smiley button
             btnSmiley.Content = new Image
             {
                 Source = new BitmapImage(new Uri("Resources/Smiley-dead.png", UriKind.Relative)),
@@ -410,6 +413,8 @@ namespace Minesweeper
                     };
                 }
             }
+
+            // Putting smiley won image onto smiley button
             btnSmiley.Content = new Image
             {
                 Source = new BitmapImage(new Uri("Resources/Smiley-won.png", UriKind.Relative)),
@@ -442,8 +447,8 @@ namespace Minesweeper
             }
         }
 
-        // Setting the color style for textblock controls
-        private void setTbStyle(TextBlock tb)
+        // Setting the color style for textblock controls that shows number of nearby bombs
+        private void SetTbStyle(TextBlock tb)
         {
             switch (tb.Text)
             {
@@ -486,8 +491,8 @@ namespace Minesweeper
             this.mainWindow.Show();
         }
 
-        // Smiley button click event.. Starting new game
-        private void btnSmiley_Click(object sender, RoutedEventArgs e)
+        // Smiley button click event (Starting new game)
+        private void BtnSmiley_Click(object sender, RoutedEventArgs e)
         {
             Field.Children.Clear();
             listOfUnits.Clear();
@@ -515,12 +520,8 @@ namespace Minesweeper
             Grid.SetColumnSpan(btnSmiley, 3);
             DoubleAnimation daW = new DoubleAnimation(frame.Width, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
             DoubleAnimation daH = new DoubleAnimation(frame.Height, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
-            // DoubleAnimation daX = new DoubleAnimation(200, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
-            // DoubleAnimation daY = new DoubleAnimation(200, TimeSpan.FromSeconds(2)) { FillBehavior = FillBehavior.HoldEnd };
-
+           
             sbExpand = new Storyboard();
-            // sbExpand.Children.Add(daX);
-            // sbExpand.Children.Add(daY);
             sbExpand.Children.Add(daH);
             sbExpand.Children.Add(daW);
 
@@ -528,14 +529,12 @@ namespace Minesweeper
 
             Storyboard.SetTargetProperty(daW, new PropertyPath("Width"));
             Storyboard.SetTargetProperty(daH, new PropertyPath("Height"));
-            //Storyboard.SetTargetProperty(daX, new PropertyPath("(0).(1)", new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.XProperty }));
-            //Storyboard.SetTargetProperty(daY, new PropertyPath("(0).(1)", new DependencyProperty[] { UIElement.RenderTransformProperty, TranslateTransform.YProperty }));
-
+            
             sbExpand.Begin();
         }
 
         // Dispatcher timer functionality
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             timer++;
             txtTimer.Text = timer.ToString();
@@ -546,7 +545,7 @@ namespace Minesweeper
             if (timer > 900)
                 txtTimer.Foreground = new SolidColorBrush(Colors.Red);
             if (timer == 999)
-                gameOver();     
+                GameOver();     
         }
     }
 }

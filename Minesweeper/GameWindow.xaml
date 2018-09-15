@@ -91,7 +91,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSmiley" Panel.ZIndex="1" Grid.Row="0" Grid.Column="1" Width="60" Height="60" Click="btnSmiley_Click"
+            <Button x:Name="btnSmiley" Panel.ZIndex="1" Grid.Row="0" Grid.Column="1" Width="60" Height="60" Click="BtnSmiley_Click"
                     Style="{StaticResource btnSmileyStyle}"/>
             <TextBox x:Name="txtMineCounter" Grid.Row="0" Grid.Column="0" Width="100" Height="50"
                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25"

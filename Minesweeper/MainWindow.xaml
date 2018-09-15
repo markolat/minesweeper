@@ -178,12 +178,12 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Difficulty:" HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontFamily="Verdana" FontSize="20" Foreground="#303030"/>
                 <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_difficulty_change"/>
-                    <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
-                    <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_difficulty_change"/>
+                    <RadioButton Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="Radiobutton_difficulty_change"/>
+                    <RadioButton Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="Radiobutton_difficulty_change"/>
+                    <RadioButton Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="Radiobutton_difficulty_change"/>
                 </StackPanel>
                 <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Play" Style="{StaticResource btnPlayStyle}" Width="150" Height="50"
-                            FontFamily="Verdana" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnPlay_click"/>
+                            FontFamily="Verdana" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnPlay_click"/>
             </Grid>
         </Border>
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" Margin="9" CornerRadius="20">
@@ -200,9 +200,9 @@
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Category:" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 10, 0, 0" FontFamily="Verdana"
                                FontSize="20" Foreground="#303030"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <RadioButton x:Name="rdbCategory1" Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="radiobutton_category_change"/>
-                    <RadioButton x:Name="rdbCategory2" Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_category_change"/>
-                    <RadioButton x:Name="rdbCategory3" Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="radiobutton_category_change"/>
+                    <RadioButton x:Name="rdbCategory1" Content="Easy" Style="{StaticResource radioButtonStyle}" IsChecked="True" Click="Radiobutton_category_change"/>
+                    <RadioButton x:Name="rdbCategory2" Content="Medium" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="Radiobutton_category_change"/>
+                    <RadioButton x:Name="rdbCategory3" Content="Hard" Style="{StaticResource radioButtonStyle}" Margin="20, 0, 0, 0" Click="Radiobutton_category_change"/>
                 </StackPanel>
                 <StackPanel x:Name="spScoresName" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" 
                             Margin="30, 0, 0, 0">
