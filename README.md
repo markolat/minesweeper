@@ -1,6 +1,6 @@
 # MineSweeper game
 
-* C#, WPF Application*
+* C#, WPF Application
 
 ## Instructions for MineSweeper
 
